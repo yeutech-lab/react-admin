@@ -1,0 +1,14 @@
+{
+  "globals": {
+    "react": "React",
+    "react-dom": "ReactDom",
+    "redux": "redux",
+    "react-redux": "react-redux"
+  },
+  "external": [
+    "react",
+    "react-dom",
+    "redux",
+    "react-redux"
+  ]
+}
