@@ -46,7 +46,8 @@
             {
                 "ignoreRestSiblings": true
             }
-        ]
+        ],
+        "import/no-unresolved": ["warn"]
     },
     "overrides": [
         {

@@ -20,8 +20,9 @@ import {
     TextField,
     TextInput,
 } from '@yeutech/react-admin';
-import Icon from 'material-ui-icons/AttachMoney';
+import Icon from '@material-ui/icons/AttachMoney';
 import { withStyles } from 'material-ui/styles';
+import Icon from '@material-ui/icons/AttachMoney';
 
 import Basket from './Basket';
 import NbItemsField from './NbItemsField';

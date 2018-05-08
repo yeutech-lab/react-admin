@@ -4,6 +4,7 @@ import { reduxForm, reducer as formReducer } from 'redux-form';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { TranslationProvider } from '@yeutech/ra-core';
+import messages from '@yeutech/ra-language-intl/translation/en.json';
 
 import { ArrayInput } from './ArrayInput';
 import NumberInput from './NumberInput';
@@ -15,7 +16,7 @@ const AppMock = ({ children }) => (
         store={createStore(
             combineReducers({
                 form: formReducer,
-                i18n: () => ({ locale: 'en', messages: {} }),
+                i18n: () => ({ locale: 'en', messages }),
             })
         )}
     >
@@ -53,6 +54,25 @@ describe('<ArrayInput />', () => {
                 .prop('fields')
                 .getAll()
         ).toBeUndefined();
+    });
+
+    it('should pass its record props to its child', () => {
+        const record = {};
+        const MockChild = () => <span />;
+        const DummyForm = () => (
+            <form>
+                <ArrayInput source="foo" record={record}>
+                    <MockChild />
+                </ArrayInput>
+            </form>
+        );
+        const DummyFormRF = reduxForm({ form: 'record-form' })(DummyForm);
+        const wrapper = mount(
+            <AppMock>
+                <DummyFormRF />
+            </AppMock>
+        );
+        expect(wrapper.find(MockChild).props().record).toBe(record);
     });
 
     it('should pass redux-form fields to child', () => {
