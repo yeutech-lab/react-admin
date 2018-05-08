@@ -47,7 +47,7 @@
                 "ignoreRestSiblings": true
             }
         ],
-        "import/no-unresolved": ["off"]
+        "import/no-unresolved": ["warn"]
     },
     "overrides": [
         {
