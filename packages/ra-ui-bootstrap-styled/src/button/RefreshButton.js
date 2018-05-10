@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import NavigationRefresh from '@material-ui/icons/Refresh';
+import Fa from 'bootstrap-styled/lib/Fa';
 
 import { refreshView as refreshViewAction } from '@yeutech/ra-core';
 import Button from './Button';
@@ -26,7 +26,7 @@ class RefreshButton extends Component {
 
         return (
             <Button label={label} onClick={this.handleClick} {...rest}>
-                <NavigationRefresh />
+                <Fa refresh className="mr-1" />
             </Button>
         );
     }

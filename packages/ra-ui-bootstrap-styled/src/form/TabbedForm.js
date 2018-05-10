@@ -1,6 +1,7 @@
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import Form from 'bootstrap-styled/lib/Form';
 import {
     reduxForm,
     getFormAsyncErrors,
@@ -101,7 +102,7 @@ export class TabbedForm extends Component {
         } = this.props;
 
         return (
-            <form
+            <Form
                 className={classnames('tabbed-form', className)}
                 key={version}
                 {...sanitizeRestProps(rest)}
@@ -158,7 +159,7 @@ export class TabbedForm extends Component {
                             submitOnEnter,
                         })}
                 </div>
-            </form>
+            </Form>
         );
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import compose from 'recompose/compose';
-import Button from 'material-ui/Button';
+import { Button } from '@yeutech/ra-ui-bootstrap-styled';
 import { withStyles } from 'material-ui/styles';
 import { Link } from '@yeutech/react-admin-bs';
 import { translate } from '@yeutech/react-admin-bs';

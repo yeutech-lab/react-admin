@@ -2,26 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { withStyles } from 'material-ui/styles';
+import Fa from 'bootstrap-styled/lib/Fa';
+
 import { fade } from 'material-ui/styles/colorManipulator';
 import ActionDelete from '@material-ui/icons/Delete';
 import classnames from 'classnames';
 import { translate, crudDelete, startUndoable } from '@yeutech/ra-core';
 
 import Button from './Button';
-
-const styles = theme => ({
-    deleteButton: {
-        color: theme.palette.error.main,
-        '&:hover': {
-            backgroundColor: fade(theme.palette.error.main, 0.12),
-            // Reset on mouse devices
-            '@media (hover: none)': {
-                backgroundColor: 'transparent',
-            },
-        },
-    },
-});
 
 class DeleteButton extends Component {
     handleDelete = event => {
@@ -47,7 +35,6 @@ class DeleteButton extends Component {
     render() {
         const {
             label = 'ra.action.delete',
-            classes = {},
             className,
         } = this.props;
         return (
@@ -56,7 +43,6 @@ class DeleteButton extends Component {
                 label={label}
                 className={classnames(
                     'ra-delete-button',
-                    classes.deleteButton,
                     className
                 )}
                 key="button"
@@ -69,7 +55,6 @@ class DeleteButton extends Component {
 
 DeleteButton.propTypes = {
     basePath: PropTypes.string,
-    classes: PropTypes.object,
     className: PropTypes.string,
     dispatchCrudDelete: PropTypes.func.isRequired,
     label: PropTypes.string,
@@ -89,5 +74,4 @@ DeleteButton.defaultProps = {
 export default compose(
     connect(null, { startUndoable, dispatchCrudDelete: crudDelete }),
     translate,
-    withStyles(styles)
 )(DeleteButton);

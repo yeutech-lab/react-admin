@@ -1,38 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-import Button from 'material-ui/Button';
-import ContentAdd from '@material-ui/icons/Add';
-import { withStyles } from 'material-ui/styles';
+import ButtonBs from 'bootstrap-styled/lib/Button';
+import Fa from 'bootstrap-styled/lib/Fa';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
 
 import Responsive from '../layout/Responsive';
 import Link from '../Link';
 import { translate } from '@yeutech/ra-core';
-
-const styles = theme => ({
-    floating: {
-        color: theme.palette.getContrastText(theme.palette.primary.main),
-        margin: 0,
-        top: 'auto',
-        right: 20,
-        bottom: 60,
-        left: 'auto',
-        position: 'fixed',
-        zIndex: 1000,
-    },
-    floatingLink: {
-        color: 'inherit',
-    },
-    desktopLink: {
-        display: 'inline-flex',
-        alignItems: 'center',
-    },
-    iconPaddingStyle: {
-        paddingRight: '0.5em',
-    },
-});
 
 const CreateButton = ({
     basePath = '',
@@ -44,28 +20,27 @@ const CreateButton = ({
 }) => (
     <Responsive
         small={
-            <Button
-                component={Link}
-                variant="fab"
+            <ButtonBs
+                tag={Link}
                 color="primary"
-                className={classnames(classes.floating, className)}
+                className={classnames('m-0', className)}
                 to={`${basePath}/create`}
                 {...rest}
             >
-                <ContentAdd />
-            </Button>
+                <Fa plus />
+            </ButtonBs>
         }
         medium={
-            <Button
-                component={Link}
+            <ButtonBs
+                tag={Link}
                 color="primary"
                 to={`${basePath}/create`}
-                className={classnames(classes.desktopLink, className)}
+                className={classnames('d-inline-flex align-items-center', className)}
                 {...rest}
             >
-                <ContentAdd className={classes.iconPaddingStyle} />
+                <Fa plus />
                 {label && translate(label)}
-            </Button>
+            </ButtonBs>
         }
     />
 );
@@ -81,7 +56,6 @@ CreateButton.propTypes = {
 const enhance = compose(
     translate,
     onlyUpdateForKeys(['basePath', 'label']),
-    withStyles(styles)
 );
 
 export default enhance(CreateButton);

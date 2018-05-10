@@ -9,7 +9,10 @@ import Table, {
     TableRow,
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import { translate, crudGetMany as crudGetManyAction } from '@yeutech/react-admin-bs';
+import {
+    translate,
+    crudGetMany as crudGetManyAction,
+} from '@yeutech/react-admin-bs';
 import compose from 'recompose/compose';
 import withStyles from 'material-ui/styles/withStyles';
 

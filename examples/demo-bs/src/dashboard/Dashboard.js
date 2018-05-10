@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { GET_LIST, GET_MANY, Responsive, ViewTitle } from '@yeutech/react-admin-bs';
+import {
+    GET_LIST,
+    GET_MANY,
+    Responsive,
+    ViewTitle,
+} from '@yeutech/react-admin-bs';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';

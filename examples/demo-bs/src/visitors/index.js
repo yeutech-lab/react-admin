@@ -18,7 +18,7 @@ import {
     TabbedForm,
     TextField,
     TextInput,
-} from '@yeutech/react-admin-bs';
+} from '@yeutech/ra-ui-bootstrap-styled';
 import Icon from '@material-ui/icons/Person';
 import withStyles from 'material-ui/styles/withStyles';
 

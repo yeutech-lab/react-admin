@@ -1,67 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import MuiButton from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import { withStyles } from 'material-ui/styles';
+import Fa from 'bootstrap-styled/lib/Fa';
+import ButtonBs from 'bootstrap-styled/lib/Button';
 import classnames from 'classnames';
 
 import { translate } from '@yeutech/ra-core';
 import Responsive from '../layout/Responsive';
 
-const styles = {
-    button: {
-        display: 'inline-flex',
-        alignItems: 'center',
-    },
-    label: {
-        paddingLeft: '0.5em',
-    },
-    labelRightIcon: {
-        paddingRight: '0.5em',
-    },
-};
-
 const Button = ({
     alignIcon = 'left',
     children,
-    classes = {},
     className,
     color = 'primary',
     label,
-    size = 'small',
+    size = 'sm',
     translate,
     ...rest
 }) => (
     <Responsive
         small={
-            <IconButton
-                arial-label={label && translate(label, { _: label })}
-                className={className}
-                color={color}
-                {...rest}
+            <Fa
+              plus
+              className={className}
+              color={color}
+							{...rest}
             >
-                {children}
-            </IconButton>
+							{children}
+            </Fa>
         }
         medium={
-            <MuiButton
-                className={classnames(classes.button, className)}
-                color={color}
-                size={size}
-                {...rest}
+            <ButtonBs
+              className={classnames('d-inline-flex align-items-center', className)}
+              color={color}
+              size={size}
+							{...rest}
             >
-                {alignIcon === 'left' && children}
+							{alignIcon === 'left' && children}
                 <span
-                    className={classnames({
-                        [classes.label]: alignIcon === 'left',
-                        [classes.labelRightIcon]: alignIcon !== 'left',
-                    })}
+                  className={classnames({
+										'pl-2': alignIcon === 'left',
+										'pr-2': alignIcon !== 'left',
+									})}
                 >
-                    {label && translate(label, { _: label })}
+                  {label && translate(label, { _: label })}
                 </span>
-                {alignIcon === 'right' && children}
-            </MuiButton>
+							{alignIcon === 'right' && children}
+            </ButtonBs>
         }
     />
 );
@@ -77,6 +62,6 @@ Button.propTypes = {
     translate: PropTypes.func.isRequired,
 };
 
-const enhance = compose(withStyles(styles), translate);
+const enhance = compose(translate);
 
 export default enhance(Button);
