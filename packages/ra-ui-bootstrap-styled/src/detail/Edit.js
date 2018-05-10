@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardContent } from 'material-ui/Card';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
 import classnames from 'classnames';
 import { EditController } from '@yeutech/ra-core';
 
@@ -87,7 +88,7 @@ const EditView = ({
                             : children.props.redirect,
                 })
             ) : (
-                <CardContent>&nbsp;</CardContent>
+                <CardBlock>&nbsp;</CardBlock>
             )}
         </Card>
     </div>
