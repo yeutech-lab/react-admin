@@ -23,7 +23,7 @@ export default translate(({ value, translate }) => (
         <CardTitle>
 					{value}
         </CardTitle>
-        <CardSubtitle>
+        <CardSubtitle className="text-muted">
 					{translate('pos.dashboard.monthly_revenue')}
         </CardSubtitle>
       </CardBlock>

@@ -1,11 +1,12 @@
 import React from 'react';
 import compose from 'recompose/compose';
-import Card, { CardHeader } from 'material-ui/Card';
-import List, {
-    ListItem,
-    ListItemSecondaryAction,
-    ListItemText,
-} from 'material-ui/List';
+import Small from 'bootstrap-styled/lib/Small';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
+import CardTitle from 'bootstrap-styled/lib/Cards/CardTitle';
+import ListGroup from 'bootstrap-styled/lib/ListGroup';
+import ListGroupItem from 'bootstrap-styled/lib/ListGroup/ListGroupItem';
+import ListGroupItemText from 'bootstrap-styled/lib/ListGroup/ListGroupItemText';
 import Avatar from 'material-ui/Avatar';
 import { withStyles } from 'material-ui/styles';
 import { Link } from 'react-router-dom';
@@ -29,14 +30,19 @@ const style = theme => ({
 
 const PendingOrders = ({ orders = [], customers = {}, translate, classes }) => (
     <Card className={classes.root}>
-        <CardHeader title={translate('pos.dashboard.pending_orders')} />
-        <List dense={true}>
+        <CardBlock>
+            <CardTitle>
+							{translate('pos.dashboard.pending_orders')}
+            </CardTitle>
+        </CardBlock>
+        <ListGroup>
             {orders.map(record => (
-                <ListItem
+                <ListGroupItem
                     key={record.id}
-                    button
+                    action
                     component={Link}
                     to={`/commands/${record.id}`}
+                    className="border-0 rounded-0"
                 >
                     {customers[record.customer_id] ? (
                         <Avatar
@@ -47,25 +53,29 @@ const PendingOrders = ({ orders = [], customers = {}, translate, classes }) => (
                     ) : (
                         <Avatar />
                     )}
-                    <ListItemText
-                        primary={new Date(record.date).toLocaleString('en-GB')}
-                        secondary={translate('pos.dashboard.order.items', {
+                    <div className="d-flex flex-column mr-2">
+                        <ListGroupItemText className="m-0">
+                          {new Date(record.date).toLocaleString('en-GB')}
+                        </ListGroupItemText>
+                        <ListGroupItemText tag={Small} className="m-0 text-muted">
+                          {translate('pos.dashboard.order.items', {
                             smart_count: record.basket.length,
                             nb_items: record.basket.length,
                             customer_name: customers[record.customer_id]
-                                ? `${customers[record.customer_id]
-                                      .first_name} ${customers[
-                                      record.customer_id
-                                  ].last_name}`
-                                : '',
-                        })}
-                    />
-                    <ListItemSecondaryAction>
+                              ? `${customers[record.customer_id]
+                                .first_name} ${customers[
+                                record.customer_id
+                                ].last_name}`
+                              : '',
+                          })}
+                        </ListGroupItemText>
+                    </div>
+                    <ListGroupItemText>
                         <span className={classes.cost}>{record.total}$</span>
-                    </ListItemSecondaryAction>
-                </ListItem>
+                    </ListGroupItemText>
+                </ListGroupItem>
             ))}
-        </List>
+        </ListGroup>
     </Card>
 );
 
