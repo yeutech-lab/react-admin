@@ -1,11 +1,13 @@
 import React from 'react';
-import Card from 'material-ui/Card';
-import Table, {
-    TableBody,
-    TableHead,
-    TableRow,
-    TableCell,
-} from 'material-ui/Table';
+import Table from 'bootstrap-styled/lib/Table';
+import Tbody from 'bootstrap-styled/lib/Table/Tbody';
+import Thead from 'bootstrap-styled/lib/Table/Thead';
+import Tr from 'bootstrap-styled/lib/Table/Tr';
+import Td from 'bootstrap-styled/lib/Table/Td';
+import Th from 'bootstrap-styled/lib/Table/Th';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
+
 import { translate, ViewTitle } from '@yeutech/react-admin-bs';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
@@ -13,26 +15,28 @@ import segments from './data';
 
 export default translate(({ translate }) => (
     <Card>
-        <ViewTitle title={translate('resources.segments.name')} />
-        <Table>
-            <TableHead>
-                <TableRow>
-                    <TableCell>
+        <CardBlock>
+            <ViewTitle title={translate('resources.segments.name')} />
+        </CardBlock>
+        <Table className="mb-0">
+            <Thead>
+                <Tr>
+                    <Th>
                         {translate('resources.segments.fields.name')}
-                    </TableCell>
-                    <TableCell />
-                </TableRow>
-            </TableHead>
-            <TableBody>
+                    </Th>
+                    <Th />
+                </Tr>
+            </Thead>
+            <Tbody>
                 {segments.map(segment => (
-                    <TableRow key={segment.id}>
-                        <TableCell>{translate(segment.name)}</TableCell>
-                        <TableCell>
+                    <Tr key={segment.id}>
+                        <Td>{translate(segment.name)}</Td>
+                        <Td>
                             <LinkToRelatedCustomers segment={segment.id} />
-                        </TableCell>
-                    </TableRow>
+                        </Td>
+                    </Tr>
                 ))}
-            </TableBody>
+            </Tbody>
         </Table>
     </Card>
 ));

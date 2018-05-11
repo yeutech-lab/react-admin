@@ -24,6 +24,7 @@ export const DatagridCell = ({
     ...rest
 }) => (
     <Td
+        style={{ verticalAlign: 'middle' }}
         className={classnames(className, 'p-0 align-middle')}
         {...sanitizeRestProps(rest)}
     >

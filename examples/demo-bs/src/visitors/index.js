@@ -76,7 +76,7 @@ export const VisitorList = withStyles(listStyles)(({ classes, ...props }) => (
         <Responsive
             xsmall={<MobileGrid />}
             medium={
-                <Datagrid striped hover>
+                <Datagrid striped>
                     <CustomerLinkField />
                     <DateField source="last_seen" type="date" />
                     <NumberField

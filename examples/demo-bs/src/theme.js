@@ -34,6 +34,10 @@ v['$input-btn-border-width'] = '1px';
 // CARDS
 
 v['$card-columns-count'] = '2';
+
+//TABLES
+
+v['$table-cell-padding'] = '.5rem .75rem';
 // 7. Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.

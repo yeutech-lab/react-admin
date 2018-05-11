@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import Table from 'bootstrap-styled/lib/Table';
 import Thead from 'bootstrap-styled/lib/Table/Thead';
 import Tr from 'bootstrap-styled/lib/Table/Tr';
 import Th from 'bootstrap-styled/lib/Table/Th';
-import Label from 'bootstrap-styled/lib/Label';
 import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
 import FormCustom from 'bootstrap-styled/lib/Form/FormCustom';
 import Form from 'bootstrap-styled/lib/Form';
@@ -90,26 +88,24 @@ class Datagrid extends Component {
         } = this.props;
 
         return (
-            <Table className={classnames(className, 'mb-0')} {...rest}>
-                <Thead>
+            <Table className={classnames(className, 'mb-0')} style={{ tableLayout: 'fixed' }} {...rest}>
+                <Thead inverse>
                     <Tr>
                         {hasBulkActions && (
-                            <Th>
+                            <Th className="py-0">
                                 <Form>
-                                    <FormGroup check>
-                                        <Label check>
-                                            <FormCustom
-                                              className="select-all"
-                                              checked={
+                                    <FormGroup className="mb-0">
+                                        <FormCustom
+                                            className="select-all cursor-pointer"
+                                            checked={
                                                 selectedIds.length > 0 &&
                                                 ids.length > 0 &&
                                                 !ids.find(
-                                                  it => selectedIds.indexOf(it) === -1
+                                                it => selectedIds.indexOf(it) === -1
                                                 )
-                                              }
-                                              onChange={this.handleSelectAll}
-                                            />
-                                        </Label>
+                                            }
+                                            onChange={this.handleSelectAll}
+                                        />
                                     </FormGroup>
                                 </Form>
                             </Th>

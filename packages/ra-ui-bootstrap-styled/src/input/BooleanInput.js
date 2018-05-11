@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import Label from 'bootstrap-styled/lib/Label';
 import FormCustom from 'bootstrap-styled/lib/Form/FormCustom';
 import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
@@ -14,7 +15,6 @@ export class BooleanInput extends Component {
 
     render() {
         const {
-            // RA props
             className,
             input,
             isRequired,

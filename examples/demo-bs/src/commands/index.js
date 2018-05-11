@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    translate,
     AutocompleteInput,
     BooleanField,
     BooleanInput,
@@ -19,7 +18,11 @@ import {
     SimpleForm,
     TextField,
     TextInput,
-} from '@yeutech/react-admin-bs';
+} from '@yeutech/ra-ui-bootstrap-styled';
+// } from '@yeutech/react-admin-bs';
+
+import { translate } from '@yeutech/react-admin-bs';
+
 import Icon from '@material-ui/icons/AttachMoney';
 import withStyles from 'material-ui/styles/withStyles';
 

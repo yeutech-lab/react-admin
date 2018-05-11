@@ -17,21 +17,20 @@ const styles = {
 };
 
 const LinkToRelatedProducts = ({ classes, record, translate }) => (
-    <Button color="primary">
-        <Link
-            to={{
-                pathname: '/products',
-                search: stringify({
-                    page: 1,
-                    perPage: 25,
-                    filter: JSON.stringify({ category_id: record.id }),
-                }),
-            }}
-            className={classes.link}
-        >
-            <ProductIcon className={classes.icon} />
-            {translate('resources.categories.fields.products')}
-        </Link>
+    <Button
+        color="primary"
+        outline tag={Link}
+        to={{
+					pathname: '/products',
+					search: stringify({
+						page: 1,
+						perPage: 25,
+						filter: JSON.stringify({ category_id: record.id }),
+					}),
+				}}
+    >
+        <ProductIcon className={classes.icon} />
+        {translate('resources.categories.fields.products')}
     </Button>
 );
 
