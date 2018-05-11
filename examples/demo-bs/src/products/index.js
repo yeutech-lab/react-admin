@@ -1,23 +1,26 @@
 import React from 'react';
 import {
     translate,
-    Create,
-    Datagrid,
-    DateField,
-    Edit,
-    EditButton,
-    Filter,
-    FormTab,
-    List,
-    NumberInput,
-    ReferenceInput,
-    ReferenceManyField,
-    SelectInput,
-    TabbedForm,
-    TextField,
-    TextInput,
     required,
 } from '@yeutech/react-admin-bs';
+import {
+	Create,
+	Datagrid,
+	DateField,
+	Edit,
+	EditButton,
+	Filter,
+	FormTab,
+	List,
+	NumberInput,
+	ReferenceInput,
+	ReferenceManyField,
+	SelectInput,
+	TabbedForm,
+	TextField,
+	TextInput,
+} from '@yeutech/ra-ui-bootstrap-styled';
+
 import Icon from '@material-ui/icons/Collections';
 import Chip from 'material-ui/Chip';
 import RichTextInput from '@yeutech/ra-input-rich-text';

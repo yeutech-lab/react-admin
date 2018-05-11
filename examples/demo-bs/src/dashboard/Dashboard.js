@@ -148,7 +148,7 @@ class Dashboard extends Component {
             <Responsive
                 xsmall={
                     <div>
-                        <ViewTitle title="Posters Galore Admin" />
+                        <ViewTitle title="RA-Bootstrap-Styled Test" />
                         <div style={styles.flexColumn}>
                             <div style={{ marginBottom: '2em' }}>
                                 <Welcome />

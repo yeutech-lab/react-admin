@@ -1,10 +1,12 @@
 import React from 'react';
-import Card, { CardHeader } from 'material-ui/Card';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
+import CardTitle from 'bootstrap-styled/lib/Cards/CardTitle';
+import CardSubtitle from 'bootstrap-styled/lib/Cards/CardSubtitle';
 import DollarIcon from '@material-ui/icons/AttachMoney';
 import { translate } from '@yeutech/react-admin-bs';
 
 const styles = {
-    card: { borderLeft: 'solid 4px #31708f', flex: '1', marginRight: '1em' },
     icon: {
         float: 'right',
         width: 54,
@@ -15,11 +17,15 @@ const styles = {
 };
 
 export default translate(({ value, translate }) => (
-    <Card style={styles.card}>
+    <Card style={{ borderLeft: 'solid 4px #31708f', flex: '1', marginRight: '1em' }}>
+      <CardBlock>
         <DollarIcon style={styles.icon} />
-        <CardHeader
-            title={value}
-            subheader={translate('pos.dashboard.monthly_revenue')}
-        />
+        <CardTitle>
+					{value}
+        </CardTitle>
+        <CardSubtitle>
+					{translate('pos.dashboard.monthly_revenue')}
+        </CardSubtitle>
+      </CardBlock>
     </Card>
 ));
