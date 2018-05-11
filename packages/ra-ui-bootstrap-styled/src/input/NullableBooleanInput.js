@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
-import { MenuItem } from 'material-ui/Menu';
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
-import classnames from 'classnames';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import Input from 'bootstrap-styled/lib/Input';
+import Option from 'bootstrap-styled/lib/Option';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import { addField, translate, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
@@ -54,35 +55,41 @@ export class NullableBooleanInput extends Component {
             resource,
             source,
             translate,
+            // Our props
+					  labelHidden,
+					  classNameInput,
+					  size,
             ...rest
         } = this.props;
         const { touched, error } = meta;
         return (
-            <TextField
-                select
-                margin="normal"
-                value={this.getStringFromBoolean(this.state.value)}
-                label={
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                }
-                error={!!(touched && error)}
-                helperText={touched && error}
-                className={classnames(classes.input, className)}
-                {...options}
-                {...sanitizeRestProps(rest)}
-                onChange={this.handleChange}
-            >
-                <MenuItem value="" />
-                <MenuItem value="false">
-                    {translate('ra.boolean.false')}
-                </MenuItem>
-                <MenuItem value="true">{translate('ra.boolean.true')}</MenuItem>
-            </TextField>
+            <FormGroup color={meta.error ? 'danger' : ''} className={className}>
+                <FieldTitle
+                    label={label}
+                    source={source}
+                    resource={resource}
+                    isRequired={isRequired}
+                    labelHidden={labelHidden}
+                />
+                <Input
+                    value={this.getStringFromBoolean(this.state.value)}
+                    onChange={this.handleChange}
+                    type="select"
+                    size={size}
+                    className={classNameInput}
+                    {...options}
+										{...sanitizeRestProps(rest)}
+                >
+                    <Option value="" />
+                    <Option value="false">
+                        {translate('ra.boolean.false')}
+                    </Option>
+                    <Option value="true">
+                        {translate('ra.boolean.true')}
+                    </Option>
+                </Input>
+                {error && <FormFeedback>{error}</FormFeedback>}
+            </FormGroup>
         );
     }
 }

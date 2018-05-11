@@ -1,22 +1,15 @@
 import React from 'react';
-import Chip from 'material-ui/Chip';
+import Badge from 'bootstrap-styled/lib/Badge';
 import { translate } from '@yeutech/react-admin-bs';
 import segments from '../segments/data';
 
-const styles = {
-    main: { display: 'flex', flexWrap: 'wrap' },
-    chip: { margin: 4 },
-};
-
 const SegmentsField = ({ record, translate }) => (
-    <span style={styles.main}>
+    <span className="d-flex flex-wrap justify-content-around">
         {record.groups &&
             record.groups.map(segment => (
-                <Chip
-                    key={segment}
-                    style={styles.chip}
-                    label={translate(segments.find(s => s.id === segment).name)}
-                />
+                <Badge key={segment} className="my-1">
+                    {translate(segments.find(s => s.id === segment).name)}
+                </Badge>
             ))}
     </span>
 );
