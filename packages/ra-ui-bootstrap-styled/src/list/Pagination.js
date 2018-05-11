@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import pure from 'recompose/pure';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import Typography from 'material-ui/Typography';
-import Toolbar from 'material-ui/Toolbar';
-import { withStyles } from 'material-ui/styles';
+import CardFooter from 'bootstrap-styled/lib/Cards/CardFooter';
+import Fa from 'bootstrap-styled/lib/Fa';
+import P from 'bootstrap-styled/lib/P';
+import PaginationBs from 'bootstrap-styled/lib/Pagination';
+import PaginationItem from 'bootstrap-styled/lib/Pagination/PaginationItem';
+import PaginationLink from 'bootstrap-styled/lib/Pagination/PaginationLink';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
 import { translate } from '@yeutech/ra-core';
 
 import Responsive from '../layout/Responsive';
-
-const styles = {
-    pageInfo: {
-        padding: '1.2em',
-    },
-    desktopToolbar: {
-        justifyContent: 'flex-end',
-    },
-    mobileToolbar: {
-        justifyContent: 'center',
-    },
-    hellip: { padding: '1.2em' },
-};
 
 export class Pagination extends Component {
     range() {
@@ -102,33 +88,32 @@ export class Pagination extends Component {
     };
 
     renderPageNums() {
-        const { classes = {} } = this.props;
-
         return this.range().map(
             (pageNum, index) =>
                 pageNum === '.' ? (
-                    <span key={`hyphen_${index}`} className={classes.hellip}>
-                        &hellip;
-                    </span>
+                  <PaginationItem key={`hyphen_${index}`}>
+                      <PaginationLink
+                        className="page-number my-1 cursor-default"
+                      >
+                          &hellip;
+                      </PaginationLink>
+                  </PaginationItem>
                 ) : (
-                    <Button
-                        className={classnames('page-number', classes.button)}
-                        color={
-                            pageNum === this.props.page ? 'default' : 'primary'
-                        }
-                        key={pageNum}
+                  <PaginationItem key={pageNum}>
+                      <PaginationLink
+                        className="page-number my-1"
                         data-page={pageNum}
                         onClick={this.gotoPage}
-                    >
-                        {pageNum}
-                    </Button>
+                      >
+												{pageNum}
+                      </PaginationLink>
+                  </PaginationItem>
                 )
         );
     }
 
     render() {
         const {
-            classes = {},
             className,
             page,
             perPage,
@@ -145,77 +130,65 @@ export class Pagination extends Component {
         return (
             <Responsive
                 small={
-                    <Toolbar
-                        className={className}
-                        classes={{ root: classes.mobileToolbar }}
-                        {...rest}
-                    >
+                    <CardFooter className="d-flex align-items-center justify-content-end" {...rest}>
                         {page > 1 && (
-                            <IconButton color="primary" onClick={this.prevPage}>
-                                <ChevronLeft />
-                            </IconButton>
+                            <div onClick={this.prevPage}>
+                                <Fa chevron-left />
+                            </div>
                         )}
-                        <Typography
-                            variant="body1"
-                            className="displayed-records"
-                        >
+                        <P className="displayed-records p-3">
                             {translate('ra.navigation.page_range_info', {
                                 offsetBegin,
                                 offsetEnd,
                                 total,
                             })}
-                        </Typography>
+                        </P>
                         {page !== nbPages && (
-                            <IconButton color="primary" onClick={this.nextPage}>
-                                <ChevronRight />
-                            </IconButton>
+                            <div onClick={this.nextPage}>
+                                <Fa chevron-right />
+                            </div>
                         )}
-                    </Toolbar>
+                    </CardFooter>
                 }
                 medium={
-                    <Toolbar
-                        className={classnames(
-                            className,
-                            classes.desktopToolbar
-                        )}
-                        {...rest}
-                    >
-                        <Typography
-                            variant="body1"
-                            className="displayed-records"
-                        >
+                    <CardFooter className="d-flex align-items-center justify-content-end">
+                        <span className="displayed-records">
                             {translate('ra.navigation.page_range_info', {
                                 offsetBegin,
                                 offsetEnd,
                                 total,
                             })}
-                        </Typography>
-                        {nbPages > 1 && [
-                            page > 1 && (
-                                <Button
-                                    color="primary"
-                                    key="prev"
-                                    onClick={this.prevPage}
-                                    className="previous-page"
-                                >
-                                    <ChevronLeft />
-                                    {translate('ra.navigation.prev')}
-                                </Button>
-                            ),
-                            this.renderPageNums(),
-                            page !== nbPages && (
-                                <Button
-                                    color="primary"
-                                    key="next"
-                                    onClick={this.nextPage}
-                                    className="next-page"
-                                >
-                                    {translate('ra.navigation.next')}
-                                    <ChevronRight />
-                                </Button>
-                            ),
-                        ]}
-                    </Toolbar>
+                        </span>
+                        {nbPages > 1 &&
+                            <PaginationBs className="m-0 ml-3 cursor-pointer">
+                                {page > 1 &&
+                                    <PaginationItem key="prev">
+                                        <PaginationLink
+                                            className="previous-page my-1"
+                                            color="primary"
+                                            onClick={this.prevPage}
+                                            previous
+                                        >
+                                            {translate('ra.navigation.prev')}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                }
+                                {this.renderPageNums()}
+                                {page !== nbPages &&
+                                    <PaginationItem key="next">
+                                        <PaginationLink
+                                            className="next my-1"
+                                            color="primary"
+                                            onClick={this.nextPage}
+                                            next
+                                        >
+                                            {translate('ra.navigation.next')}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                }
+                            </PaginationBs>
+                        }
+                    </CardFooter>
                 }
             />
         );
@@ -232,6 +205,6 @@ Pagination.propTypes = {
     total: PropTypes.number,
 };
 
-const enhance = compose(pure, translate, withStyles(styles));
+const enhance = compose(pure, translate);
 
 export default enhance(Pagination);

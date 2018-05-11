@@ -3,22 +3,23 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 import { getDefaultValues, translate } from '@yeutech/ra-core';
+import Form from 'bootstrap-styled/lib/Form';
 import FormInput from './FormInput';
 import Toolbar from './Toolbar';
 
-const styles = theme => ({
-    form: {
-        [theme.breakpoints.up('sm')]: {
-            padding: '0 1em 1em 1em',
-        },
-        [theme.breakpoints.down('xs')]: {
-            padding: '0 1em 5em 1em',
-        },
-    },
-});
+// TODO: replace with styled?
+// const styles = theme => ({
+//     form: {
+//         [theme.breakpoints.up('sm')]: {
+//             padding: '0 1em 1em 1em',
+//         },
+//         [theme.breakpoints.down('xs')]: {
+//             padding: '0 1em 5em 1em',
+//         },
+//     },
+// });
 
 const sanitizeRestProps = ({
     anyTouched,
@@ -80,11 +81,11 @@ export class SimpleForm extends Component {
         } = this.props;
 
         return (
-            <form
+            <Form
                 className={classnames('simple-form', className)}
                 {...sanitizeRestProps(rest)}
             >
-                <div className={classes.form} key={version}>
+                <div className="p-3" key={version}>
                     {Children.map(children, input => (
                         <FormInput
                             basePath={basePath}
@@ -101,7 +102,7 @@ export class SimpleForm extends Component {
                         pristine,
                         submitOnEnter,
                     })}
-            </form>
+            </Form>
         );
     }
 }
@@ -140,7 +141,6 @@ const enhance = compose(
         destroyOnUnmount: false,
         enableReinitialize: true,
     }),
-    withStyles(styles)
 );
 
 export default enhance(SimpleForm);

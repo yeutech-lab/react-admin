@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 import { ReferenceFieldController } from '@yeutech/ra-core';
 
@@ -8,18 +7,11 @@ import LinearProgress from '../layout/LinearProgress';
 import Link from '../Link';
 import sanitizeRestProps from './sanitizeRestProps';
 
-const styles = theme => ({
-    link: {
-        color: theme.palette.primary.main,
-    },
-});
-
 export const ReferenceFieldView = ({
     allowEmpty,
     basePath,
     children,
     className,
-    classes = {},
     isLoading,
     record,
     reference,
@@ -37,7 +29,7 @@ export const ReferenceFieldView = ({
     if (resourceLinkPath) {
         return (
             <Link
-                className={classnames(classes.link, className)}
+                className={className}
                 to={resourceLinkPath}
             >
                 {React.cloneElement(children, {
@@ -150,7 +142,7 @@ ReferenceField.defaultProps = {
     record: {},
 };
 
-const EnhancedReferenceField = withStyles(styles)(ReferenceField);
+const EnhancedReferenceField = ReferenceField;
 
 EnhancedReferenceField.defaultProps = {
     addLabel: true,

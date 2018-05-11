@@ -33,7 +33,6 @@ const renderInput = ({
         helperText={touched && error}
         {...inputProps}
         {...props}
-        fullWidth
     />
 );
 const login = (auth, dispatch, { redirectTo }) =>

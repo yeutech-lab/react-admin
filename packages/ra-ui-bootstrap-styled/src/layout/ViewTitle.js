@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import CardTitle from 'bootstrap-styled/lib/Cards/CardTitle';
 import classnames from 'classnames';
 
 import Responsive from './Responsive';
@@ -17,9 +16,9 @@ const ViewTitle = ({ className, title, ...rest }) => (
             />
         }
         medium={
-            <CardContent className={classnames('title', className)} {...rest}>
-                <Typography variant="headline">{title}</Typography>
-            </CardContent>
+            <CardTitle className={classnames('title mb-0', className)} {...rest}>
+                {title}
+            </CardTitle>
         }
     />
 );

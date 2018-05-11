@@ -1,10 +1,10 @@
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardText from 'bootstrap-styled/lib/Cards/CardText';
+import Form from 'bootstrap-styled/lib/Form';
 import classnames from 'classnames';
-import { withStyles } from 'material-ui/styles';
 
 import Header from '../layout/Header';
 import Title from '../layout/Title';
@@ -14,16 +14,8 @@ import DefaultActions from './ListActions';
 import { ListController } from '@yeutech/ra-core';
 import defaultTheme from '../defaultTheme';
 
-const styles = {
-    root: {},
-    actions: {},
-    header: {},
-    noResults: { padding: 20 },
-};
-
 const sanitizeRestProps = ({
     children,
-    classes,
     className,
     filters,
     pagination,
@@ -68,7 +60,6 @@ export const ListView = ({
     bulkActions = <DefaultBulkActions />,
     children,
     className,
-    classes = {},
     currentSort,
     data,
     defaultTitle,
@@ -102,29 +93,26 @@ export const ListView = ({
 
     return (
         <div
-            className={classnames('list-page', classes.root, className)}
+            className={classnames('list-page', className)}
             {...sanitizeRestProps(rest)}
         >
-            <Card>
+            <Card style={{ opacity: isLoading ? 0.8 : 1 }}>
                 <Header
-                    className={classes.header}
-                    title={titleElement}
-                    actions={React.cloneElement(actions, {
-                        className: classes.actions,
-                    })}
-                    actionProps={{
-                        basePath,
-                        bulkActions,
-                        displayedFilters,
-                        filters,
-                        filterValues,
-                        hasCreate,
-                        onUnselectItems,
-                        refresh,
-                        resource,
-                        selectedIds,
-                        showFilter,
-                    }}
+                  title={titleElement}
+                  actions={React.cloneElement(actions)}
+                  actionProps={{
+										basePath,
+										bulkActions,
+										displayedFilters,
+										filters,
+										filterValues,
+										hasCreate,
+										onUnselectItems,
+										refresh,
+										resource,
+										selectedIds,
+										showFilter,
+									}}
                 />
                 {filters &&
                     React.cloneElement(filters, {
@@ -134,7 +122,8 @@ export const ListView = ({
                         resource,
                         setFilters,
                         context: 'form',
-                    })}
+                    })
+                }
                 {isLoading || total > 0 ? (
                     <div key={version}>
                         {children &&
@@ -154,16 +143,14 @@ export const ListView = ({
                             })}
                         {!isLoading &&
                             !ids.length && (
-                                <CardContent style={styles.noResults}>
-                                    <Typography variant="body1">
-                                        {translate(
-                                            'ra.navigation.no_more_results',
-                                            {
-                                                page,
-                                            }
-                                        )}
-                                    </Typography>
-                                </CardContent>
+                                <CardText className="mt-0 pl-4 pb-4">
+                                    {translate(
+                                        'ra.navigation.no_more_results',
+                                        {
+                                            page,
+                                        }
+                                    )}
+                                </CardText>
                             )}
                         {pagination &&
                             React.cloneElement(pagination, {
@@ -174,11 +161,9 @@ export const ListView = ({
                             })}
                     </div>
                 ) : (
-                    <CardContent className={classes.noResults}>
-                        <Typography variant="body1">
-                            {translate('ra.navigation.no_results')}
-                        </Typography>
-                    </CardContent>
+                  <CardText className="mt-0 pl-4 pb-4">
+                    {translate('ra.navigation.no_results')}
+                  </CardText>
                 )}
             </Card>
         </div>
@@ -191,7 +176,6 @@ ListView.propTypes = {
     bulkActions: PropTypes.oneOfType([PropTypes.bool, PropTypes.element]),
     children: PropTypes.element,
     className: PropTypes.string,
-    classes: PropTypes.object,
     currentSort: PropTypes.shape({
         field: PropTypes.string,
         order: PropTypes.string,
@@ -276,7 +260,6 @@ List.propTypes = {
     actions: PropTypes.element,
     bulkActions: PropTypes.oneOfType([PropTypes.element, PropTypes.bool]),
     children: PropTypes.node,
-    classes: PropTypes.object,
     className: PropTypes.string,
     filter: PropTypes.object,
     filters: PropTypes.element,
@@ -306,4 +289,4 @@ List.defaultProps = {
     theme: defaultTheme,
 };
 
-export default withStyles(styles)(List);
+export default List;

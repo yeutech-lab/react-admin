@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import Menu from 'material-ui/Menu';
-import { withStyles } from 'material-ui/styles';
-import ContentFilter from '@material-ui/icons/FilterList';
+import Fa from 'bootstrap-styled/lib/Fa';
+import ButtonDropdown from 'bootstrap-styled/lib/Button/ButtonDropdown';
+import DropdownToggle from 'bootstrap-styled/lib/Dropdown/DropdownToggle';
+import DropdownMenu from 'bootstrap-styled/lib/Dropdown/DropdownMenu';
 import classnames from 'classnames';
 import compose from 'recompose/compose';
 import { translate } from '@yeutech/ra-core';
 
 import FilterButtonMenuItem from './FilterButtonMenuItem';
 import Button from '../button/Button';
-
-const styles = {
-    root: { display: 'inline-block' },
-    label: {
-        marginLeft: '0.5em',
-    },
-};
 
 export class FilterButton extends Component {
     constructor(props) {
@@ -68,7 +62,6 @@ export class FilterButton extends Component {
     render() {
         const hiddenFilters = this.getHiddenFilters();
         const {
-            classes = {},
             className,
             resource,
             showFilter,
@@ -81,20 +74,19 @@ export class FilterButton extends Component {
 
         return (
             hiddenFilters.length > 0 && (
-                <div className={classnames(classes.root, className)} {...rest}>
-                    <Button
+              <ButtonDropdown className={classnames('d-inline-block', className)} isOpen={open} toggle={this.handleClickButton} {...rest}>
+                    <DropdownToggle
                         ref={node => {
                             this.button = node;
                         }}
-                        className="add-filter"
+                        className="add-filter h-100 cursor-pointer"
                         label="ra.action.add_filter"
                         onClick={this.handleClickButton}
                     >
-                        <ContentFilter />
-                    </Button>
-                    <Menu
+                        <Fa search />
+                    </DropdownToggle>
+                    <DropdownMenu
                         open={open}
-                        anchorEl={anchorEl}
                         onClose={this.handleRequestClose}
                     >
                         {hiddenFilters.map(filterElement => (
@@ -105,8 +97,8 @@ export class FilterButton extends Component {
                                 onShow={this.handleShow}
                             />
                         ))}
-                    </Menu>
-                </div>
+                    </DropdownMenu>
+                </ButtonDropdown>
             )
         );
     }
@@ -119,8 +111,7 @@ FilterButton.propTypes = {
     filterValues: PropTypes.object.isRequired,
     showFilter: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
-    classes: PropTypes.object,
     className: PropTypes.string,
 };
 
-export default compose(translate, withStyles(styles))(FilterButton);
+export default compose(translate)(FilterButton);

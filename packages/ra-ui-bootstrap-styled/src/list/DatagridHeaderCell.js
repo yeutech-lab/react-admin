@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import shouldUpdate from 'recompose/shouldUpdate';
 import compose from 'recompose/compose';
-import { TableCell, TableSortLabel } from 'material-ui/Table';
+import Th from 'bootstrap-styled/lib/Table/Th';
+import Button from 'bootstrap-styled/lib/Button';
+import Fa from 'bootstrap-styled/lib/Fa';
 import Tooltip from 'material-ui/Tooltip';
 import { FieldTitle, translate } from '@yeutech/ra-core';
 
@@ -17,11 +19,8 @@ export const DatagridHeaderCell = ({
     translate,
     ...rest
 }) => (
-    <TableCell
-        className={classnames(className, field.props.headerClassName)}
-        numeric={field.props.textAlign === 'right'}
-        padding="none"
-        variant="head"
+    <Th
+        className={classnames(className, 'p-0', field.props.headerClassName)}
         {...rest}
     >
         {field.props.sortable !== false && field.props.source ? (
@@ -34,18 +33,30 @@ export const DatagridHeaderCell = ({
                 }
                 enterDelay={300}
             >
-                <TableSortLabel
-                    active={field.props.source === currentSort.field}
-                    direction={currentSort.order === 'ASC' ? 'asc' : 'desc'}
-                    data-sort={field.props.source}
-                    onClick={updateSort}
+                <Button
+                  tag='span'
+                  outline
+                  color="secondary"
+                  className="border-0"
+                  active={field.props.source === currentSort.field}
+                  onClick={updateSort}
+                  data-sort={field.props.source}
                 >
                     <FieldTitle
                         label={field.props.label}
                         source={field.props.source}
                         resource={resource}
                     />
-                </TableSortLabel>
+									{field.props.source === currentSort.field ? (
+										currentSort.order === 'ASC' ? (
+                      <Fa long-arrow-up className="ml-2" />
+										) : (
+                      <Fa long-arrow-down className="ml-2" />
+										)
+									) : (
+										false
+									)}
+                </Button>
             </Tooltip>
         ) : (
             <FieldTitle
@@ -54,7 +65,7 @@ export const DatagridHeaderCell = ({
                 resource={resource}
             />
         )}
-    </TableCell>
+    </Th>
 );
 
 DatagridHeaderCell.propTypes = {

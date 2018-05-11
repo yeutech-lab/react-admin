@@ -81,7 +81,7 @@ class BulkActions extends Component {
         return (
             <div>
                 <Button
-                    buttonRef={this.storeButtonRef}
+                  innerRef={this.storeButtonRef}
                     className={classnames(
                         'bulk-actions-button',
                         className,

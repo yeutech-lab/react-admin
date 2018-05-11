@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import {
-    FormLabel,
-    FormControl,
-    FormGroup,
-    FormControlLabel,
-    FormHelperText,
-} from 'material-ui/Form';
-import Checkbox from 'material-ui/Checkbox';
-import { withStyles } from 'material-ui/styles';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
+import Input from 'bootstrap-styled/lib/Input';
+import Label from 'bootstrap-styled/lib/Label';
 import compose from 'recompose/compose';
 import { addField, translate, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
-
-const styles = theme => ({
-    root: {},
-    label: {
-        transform: 'translate(0, 5px) scale(0.75)',
-        transformOrigin: `top ${theme.direction === 'ltr' ? 'left' : 'right'}`,
-    },
-});
 
 /**
  * An Input component for a checkbox group, using an array of objects for the options
@@ -111,23 +98,28 @@ export class CheckboxGroupInput extends Component {
               ? optionText(choice)
               : get(choice, optionText);
         return (
-            <FormControlLabel
-                key={get(choice, optionValue)}
+          <Label check key={get(choice, optionValue)}>
+              <Input
+                type="checkbox"
                 checked={
-                    value
-                        ? value.find(v => v == get(choice, optionValue)) !==
-                          undefined
-                        : false
-                }
+									value ? (
+										value.find((v) => v === get(choice, optionValue)) !==
+										undefined
+									) : (
+										false
+									)
+								}
                 onChange={this.handleCheck}
                 value={String(get(choice, optionValue))}
-                control={<Checkbox color="primary" {...options} />}
-                label={
-                    translateChoice
-                        ? translate(choiceName, { _: choiceName })
-                        : choiceName
-                }
-            />
+              />
+						{
+							translateChoice ? (
+								translate(choiceName, { _: choiceName })
+							) : (
+								choiceName
+							)
+						}
+          </Label>
         );
     };
 
@@ -135,7 +127,6 @@ export class CheckboxGroupInput extends Component {
         const {
             choices,
             className,
-            classes = {},
             isRequired,
             label,
             meta,
@@ -153,31 +144,23 @@ export class CheckboxGroupInput extends Component {
         const { touched, error, helperText = false } = meta;
 
         return (
-            <FormControl
-                className={className}
-                component="fieldset"
-                margin="normal"
-                {...sanitizeRestProps(rest)}
-            >
-                <FormLabel component="legend" className={classes.label}>
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                </FormLabel>
-                <FormGroup row>{choices.map(this.renderCheckbox)}</FormGroup>
-                {touched && error && <FormHelperText>{error}</FormHelperText>}
-                {helperText && <FormHelperText>{helperText}</FormHelperText>}
-            </FormControl>
+            <FormGroup check className={classnames(className, 'd-inline-flex', (inline ? 'flex-row' : 'flex-column'))} {...sanitizeRestProps(rest)}>
+                <FieldTitle
+                  label={label}
+                  source={source}
+                  resource={resource}
+                  isRequired={isRequired}
+                />
+							  {choices.map(this.renderCheckbox)}
+                {error && <FormFeedback>{error}</FormFeedback>}
+                {helperText && <FormFeedback>{helperText}</FormFeedback>}
+            </FormGroup>
         );
     }
 }
 
 CheckboxGroupInput.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
-    classes: PropTypes.object,
     className: PropTypes.string,
     label: PropTypes.string,
     source: PropTypes.string,
@@ -209,11 +192,6 @@ CheckboxGroupInput.defaultProps = {
 const EnhancedCheckboxGroupInput = compose(
     addField,
     translate,
-    withStyles(styles)
 )(CheckboxGroupInput);
-
-EnhancedCheckboxGroupInput.defaultProps = {
-    fullWidth: true,
-};
 
 export default EnhancedCheckboxGroupInput;

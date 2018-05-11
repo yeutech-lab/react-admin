@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import pure from 'recompose/pure';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 import compose from 'recompose/compose';
 import sanitizeRestProps from './sanitizeRestProps';
@@ -46,7 +45,6 @@ const styles = {
  * <span>25,99 $US</span>
  */
 export const NumberField = ({
-    classes = {},
     className,
     record,
     source,
@@ -61,7 +59,7 @@ export const NumberField = ({
     if (!hasNumberFormat)
         return (
             <span
-                className={classnames(classes.input, className)}
+                className={classnames('text-right', className)}
                 {...sanitizeRestProps(rest)}
             >
                 {value}
@@ -70,7 +68,7 @@ export const NumberField = ({
 
     return (
         <span
-            className={classnames(classes.input, className)}
+            className={classnames('text-right', className)}
             {...sanitizeRestProps(rest)}
         >
             {value.toLocaleString(locales, options)}
@@ -96,7 +94,7 @@ NumberField.propTypes = {
     source: PropTypes.string.isRequired,
 };
 
-const ComposedNumberField = compose(pure, withStyles(styles))(NumberField);
+const ComposedNumberField = compose(pure)(NumberField);
 ComposedNumberField.defaultProps = {
     addLabel: true,
     textAlign: 'right',

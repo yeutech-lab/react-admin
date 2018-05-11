@@ -1668,6 +1668,21 @@ bootstrap-styled@^1.6.5:
     react-transition-group "^2.2.1"
     tether-fix "^1.4.0-fix-es"
 
+"bootstrap-styled@git+ssh://git@module.kopaxgroup.com:20024/bootstrap-styled/bootstrap-styled.yeutech.com.git#dev":
+  version "1.6.6"
+  resolved "git+ssh://git@module.kopaxgroup.com:20024/bootstrap-styled/bootstrap-styled.yeutech.com.git#f2a6cb028d4ca14e347fafbc0efac9c3ee05f887"
+  dependencies:
+    basic-math-utils "^0.3.4"
+    bootstrap-styled-mixins "^1.0.4"
+    classnames "^2.2.5"
+    color "^1.0.3"
+    lodash.omit "^4.5.0"
+    map-to-css-modules "^1.0.6"
+    prop-types "^15.6.1"
+    react-portal "^4.1.2"
+    react-transition-group "^2.2.1"
+    tether-fix "^1.4.0-fix-es"
+
 boxen@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-1.3.0.tgz#55c6c39a8ba58d9c61ad22cd877532deb665a20b"

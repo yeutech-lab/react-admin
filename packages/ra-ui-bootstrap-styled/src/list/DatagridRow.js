@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TableCell, TableRow } from 'material-ui/Table';
-import Checkbox from 'material-ui/Checkbox';
+import Tr from 'bootstrap-styled/lib/Table/Tr';
+import Td from 'bootstrap-styled/lib/Table/Td';
+import Label from 'bootstrap-styled/lib/Label';
+import FormCustom from 'bootstrap-styled/lib/Form/FormCustom';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import Form from 'bootstrap-styled/lib/Form';
 import classnames from 'classnames';
 
 import DatagridCell from './DatagridCell';
 
 const sanitizeRestProps = ({
-    classes,
     className,
     resource,
     children,
@@ -31,7 +34,6 @@ class DatagridRow extends Component {
         const {
             basePath,
             children,
-            classes,
             className,
             hasBulkActions,
             hover,
@@ -40,26 +42,28 @@ class DatagridRow extends Component {
             resource,
             selected,
             style,
-            styles,
             ...rest
         } = this.props;
         return (
-            <TableRow
+            <Tr
                 className={className}
                 key={id}
-                style={style}
-                hover={hover}
                 {...sanitizeRestProps(rest)}
             >
                 {hasBulkActions && (
-                    <TableCell padding="none">
-                        <Checkbox
-                            color="primary"
-                            className={`select-item ${classes.checkbox}`}
-                            checked={selected}
-                            onClick={this.handleToggle}
-                        />
-                    </TableCell>
+                    <Td className="m-0">
+                        <Form>
+                            <FormGroup check>
+                                <Label check>
+                                    <FormCustom
+                                      className="select-item"
+                                      checked={selected}
+                                      onClick={this.handleToggle}
+                                    />
+                                </Label>
+                            </FormGroup>
+                        </Form>
+                    </Td>
                 )}
                 {React.Children.map(
                     children,
@@ -69,7 +73,7 @@ class DatagridRow extends Component {
                                 key={`${id}-${field.props.source || index}`}
                                 className={classnames(
                                     `column-${field.props.source}`,
-                                    classes.rowCell
+                                    'px-2'
                                 )}
                                 record={record}
                                 id={id}
@@ -77,7 +81,7 @@ class DatagridRow extends Component {
                             />
                         ) : null
                 )}
-            </TableRow>
+            </Tr>
         );
     }
 }
@@ -85,7 +89,6 @@ class DatagridRow extends Component {
 DatagridRow.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
-    classes: PropTypes.object,
     className: PropTypes.string,
     hasBulkActions: PropTypes.bool.isRequired,
     hover: PropTypes.bool,

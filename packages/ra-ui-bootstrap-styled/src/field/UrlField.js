@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import pure from 'recompose/pure';
 import sanitizeRestProps from './sanitizeRestProps';
+import A from 'bootstrap-styled/lib/A';
 
 const UrlField = ({ className, source, record = {}, ...rest }) => (
-    <a
+    <A
         className={className}
         href={get(record, source)}
         {...sanitizeRestProps(rest)}
     >
         {get(record, source)}
-    </a>
+    </A>
 );
 
 UrlField.propTypes = {

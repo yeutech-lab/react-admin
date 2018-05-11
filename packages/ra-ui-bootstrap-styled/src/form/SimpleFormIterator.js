@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Typography from 'material-ui/Typography';
-import CloseIcon from '@material-ui/icons/RemoveCircleOutline';
-import Button from 'material-ui/Button';
-import AddIcon from '@material-ui/icons/AddCircleOutline';
+import Fa from 'bootstrap-styled/lib/Fa';
+import Ul from 'bootstrap-styled/lib/Ul';
+import Li from 'bootstrap-styled/lib/Li';
+import P from 'bootstrap-styled/lib/P';
+
+import ButtonBs from 'bootstrap-styled/lib/Button';
 import { withStyles } from 'material-ui/styles';
 import { translate } from '@yeutech/ra-core';
 
@@ -91,7 +94,7 @@ export class SimpleFormIterator extends Component {
             translate,
         } = this.props;
         return fields ? (
-            <ul className={classes.root}>
+            <Ul className={classes.root}>
                 {submitFailed && error && <span>{error}</span>}
                 <TransitionGroup>
                     {fields.map((member, index) => (
@@ -100,13 +103,10 @@ export class SimpleFormIterator extends Component {
                             timeout={500}
                             classNames="fade"
                         >
-                            <li className={classes.line}>
-                                <Typography
-                                    variant="body1"
-                                    className={classes.index}
-                                >
+                            <Li className={classes.line}>
+                                <P className={classes.index}>
                                     {index + 1}
-                                </Typography>
+                                </P>
                                 <section className={classes.form}>
                                     {Children.map(children, input => (
                                         <FormInput
@@ -124,29 +124,29 @@ export class SimpleFormIterator extends Component {
                                     ))}
                                 </section>
                                 <span className={classes.action}>
-                                    <Button
+                                    <ButtonBs
                                         size="small"
                                         onClick={this.removeField(index)}
                                     >
-                                        <CloseIcon
+                                        <Fa close
                                             className={classes.leftIcon}
                                         />
                                         {translate('ra.action.remove')}
-                                    </Button>
+                                    </ButtonBs>
                                 </span>
-                            </li>
+                            </Li>
                         </CSSTransition>
                     ))}
                 </TransitionGroup>
-                <li className={classes.line}>
+                <Li className={classes.line}>
                     <span className={classes.action}>
-                        <Button size="small" onClick={this.addField}>
-                            <AddIcon className={classes.leftIcon} />
+                        <ButtonBs size="small" onClick={this.addField}>
+                            <Fa plus className={classes.leftIcon} />
                             {translate('ra.action.add')}
-                        </Button>
+                        </ButtonBs>
                     </span>
-                </li>
-            </ul>
+                </Li>
+            </Ul>
         ) : null;
     }
 }

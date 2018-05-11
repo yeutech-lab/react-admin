@@ -1,30 +1,50 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { CardContent } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
-import ActionHide from '@material-ui/icons/HighlightOff';
 import compose from 'recompose/compose';
 import withProps from 'recompose/withProps';
-import { withStyles } from 'material-ui/styles';
+import styled from 'styled-components';
+import Fa from 'bootstrap-styled/lib/Fa';
+import Button from 'bootstrap-styled/lib/Button';
+import FormBs from 'bootstrap-styled/lib/Form';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
 import classnames from 'classnames';
 import lodashSet from 'lodash/set';
 import { translate } from '@yeutech/ra-core';
 
-const styles = ({ palette: { primary1Color } }) => ({
-    card: {
-        marginTop: '-14px',
-        paddingTop: 0,
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-        flexWrap: 'wrap',
-    },
-    body: { display: 'flex', alignItems: 'flex-end' },
-    spacer: { width: 48 },
-    icon: { color: primary1Color || '#00bcd4', paddingBottom: 0 },
-    clearFix: { clear: 'right' },
-});
+// const styles = ({ palette: { primary1Color } }) => ({
+//     card: {
+//         marginTop: '-14px',
+//         paddingTop: 0,
+//         display: 'flex',
+//         justifyContent: 'flex-end',
+//         alignItems: 'flex-end',
+//         flexWrap: 'wrap',
+//     },
+//     body: { display: 'flex', alignItems: 'flex-end' },
+//     spacer: { width: 48 },
+//     icon: { color: primary1Color || '#00bcd4', paddingBottom: 0 },
+//     clearFix: { clear: 'right' },
+// });
+
+
+const Form = styled(FormBs)`
+  &.form-inline {
+    .filter-field {
+      position: relative;
+      }
+    .form-group {
+      flex-direction: column !important;
+    }
+    .btn {
+      position: absolute;
+      top: 24px;
+      right: 5px;
+      z-index: 800;
+      border-color: transparent;
+    }
+  }
+`;
 
 const emptyRecord = {};
 
@@ -87,7 +107,6 @@ export class FilterForm extends Component {
 
     render() {
         const {
-            classes = {},
             className,
             resource,
             translate,
@@ -95,48 +114,43 @@ export class FilterForm extends Component {
         } = this.props;
 
         return (
-            <div className={className} {...sanitizeRestProps(rest)}>
-                <CardContent className={classes.card}>
-                    {this.getShownFilters()
-                        .reverse()
-                        .map(filterElement => (
-                            <div
-                                key={filterElement.props.source}
-                                data-source={filterElement.props.source}
-                                className={classnames(
-                                    'filter-field',
-                                    classes.body
+          <Form inline className={classnames(className, 'justify-content-end align-items-end flex-wrap')} {...sanitizeRestProps(rest)}>
+            {this.getShownFilters()
+                .reverse()
+                .map(filterElement => (
+                    <div
+                        key={filterElement.props.source}
+                        data-source={filterElement.props.source}
+                        className="filter-field mx-2 align-items-end my-3"
+                    >
+                        <div>
+                            <Field
+                              allowEmpty
+                              {...filterElement.props}
+                              name={filterElement.props.source}
+                              component={filterElement.type}
+                              resource={resource}
+                              record={emptyRecord}
+                            />
+                        </div>
+                        {!filterElement.props.alwaysOn && (
+                            <Button
+                                className="hide-filter cursor-pointer"
+                                color="danger"
+                                size="sm"
+                                outline
+                                onClick={this.handleHide}
+                                data-key={filterElement.props.source}
+                                tooltip={translate(
+                                    'ra.action.remove_filter'
                                 )}
                             >
-                                {filterElement.props.alwaysOn ? (
-                                    <div className={classes.spacer}>&nbsp;</div>
-                                ) : (
-                                    <IconButton
-                                        className="hide-filter"
-                                        onClick={this.handleHide}
-                                        data-key={filterElement.props.source}
-                                        tooltip={translate(
-                                            'ra.action.remove_filter'
-                                        )}
-                                    >
-                                        <ActionHide />
-                                    </IconButton>
-                                )}
-                                <div>
-                                    <Field
-                                        allowEmpty
-                                        {...filterElement.props}
-                                        name={filterElement.props.source}
-                                        component={filterElement.type}
-                                        resource={resource}
-                                        record={emptyRecord}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                </CardContent>
-                <div className={classes.clearFix} />
-            </div>
+                                <Fa remove />
+                            </Button>
+                        )}
+                    </div>
+                ))}
+            </Form>
         );
     }
 }
@@ -148,7 +162,6 @@ FilterForm.propTypes = {
     hideFilter: PropTypes.func.isRequired,
     initialValues: PropTypes.object,
     translate: PropTypes.func.isRequired,
-    classes: PropTypes.object,
     className: PropTypes.string,
 };
 
@@ -177,7 +190,6 @@ export const mergeInitialValuesWithDefaultValues = ({
 });
 
 const enhance = compose(
-    withStyles(styles),
     translate,
     withProps(mergeInitialValuesWithDefaultValues),
     reduxForm({

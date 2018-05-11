@@ -76,7 +76,7 @@ export const VisitorList = withStyles(listStyles)(({ classes, ...props }) => (
         <Responsive
             xsmall={<MobileGrid />}
             medium={
-                <Datagrid>
+                <Datagrid striped>
                     <CustomerLinkField />
                     <DateField source="last_seen" type="date" />
                     <NumberField
@@ -132,7 +132,6 @@ export const VisitorEdit = withStyles(editStyles)(({ classes, ...props }) => (
                     type="email"
                     source="email"
                     validation={{ email: true }}
-                    options={{ fullWidth: true }}
                     formClassName={classes.email}
                 />
                 <DateInput source="birthday" />
@@ -218,7 +217,6 @@ export const VisitorCreate = withStyles(editStyles)(({ classes, ...props }) => (
                     type="email"
                     source="email"
                     validation={{ email: true }}
-                    options={{ fullWidth: true }}
                     formClassName={classes.email}
                 />
                 <DateInput source="birthday" />
