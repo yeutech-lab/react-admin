@@ -10,17 +10,15 @@ import compose from 'recompose/compose';
 import { translate } from '@yeutech/ra-core';
 
 import FilterButtonMenuItem from './FilterButtonMenuItem';
-import Button from '../button/Button';
 
 export class FilterButton extends Component {
     constructor(props) {
         super(props);
         this.handleShow = this.handleShow.bind(this);
         this.state = {
-            open: false,
+					isOpen: false,
         };
         this.handleClickButton = this.handleClickButton.bind(this);
-        this.handleRequestClose = this.handleRequestClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
     }
 
@@ -34,30 +32,18 @@ export class FilterButton extends Component {
         );
     }
 
-    handleClickButton(event) {
-        // This prevents ghost click.
-        event.preventDefault();
-
+    handleClickButton() {
         this.setState({
-            open: true,
-            anchorEl: findDOMNode(this.button), // eslint-disable-line react/no-find-dom-node
-        });
-    }
-
-    handleRequestClose() {
-        this.setState({
-            open: false,
+					isOpen: !this.state.isOpen
         });
     }
 
     handleShow({ source, defaultValue }) {
         this.props.showFilter(source, defaultValue);
         this.setState({
-            open: false,
+					isOpen: false,
         });
     }
-
-    button = null;
 
     render() {
         const hiddenFilters = this.getHiddenFilters();
@@ -70,25 +56,22 @@ export class FilterButton extends Component {
             translate,
             ...rest
         } = this.props;
-        const { open, anchorEl } = this.state;
+        const { isOpen } = this.state;
 
         return (
             hiddenFilters.length > 0 && (
-              <ButtonDropdown className={classnames('d-inline-block', className)} isOpen={open} toggle={this.handleClickButton} {...rest}>
+                <ButtonDropdown
+                    className={classnames('d-inline-block', className)}
+                    isOpen={isOpen}
+                    toggle={this.handleClickButton}
+                    {...rest}
+                >
                     <DropdownToggle
-                        ref={node => {
-                            this.button = node;
-                        }}
                         className="add-filter h-100 cursor-pointer"
-                        label="ra.action.add_filter"
-                        onClick={this.handleClickButton}
                     >
                         <Fa search />
                     </DropdownToggle>
-                    <DropdownMenu
-                        open={open}
-                        onClose={this.handleRequestClose}
-                    >
+                    <DropdownMenu right>
                         {hiddenFilters.map(filterElement => (
                             <FilterButtonMenuItem
                                 key={filterElement.props.source}

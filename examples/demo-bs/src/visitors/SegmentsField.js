@@ -7,7 +7,7 @@ const SegmentsField = ({ record, translate }) => (
     <span className="d-flex flex-wrap justify-content-around">
         {record.groups &&
             record.groups.map(segment => (
-                <Badge key={segment} className="my-1">
+                <Badge key={segment} className="my-1 p-" color={(`${segment}` === 'regular') && 'success' ||  (`${segment}` === 'returns') && 'danger' || (`${segment}` === 'collector') && 'info' || (`${segment}` === 'compulsive') && 'warning' || 'default'}>
                     {translate(segments.find(s => s.id === segment).name)}
                 </Badge>
             ))}
