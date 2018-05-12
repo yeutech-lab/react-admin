@@ -4,6 +4,10 @@ import get from 'lodash/get';
 import TextField from 'material-ui/TextField';
 import { MenuItem } from 'material-ui/Menu';
 import { withStyles } from 'material-ui/styles';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import Input from 'bootstrap-styled/lib/Input';
+import Option from 'bootstrap-styled/lib/Option';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import compose from 'recompose/compose';
 import { addField, translate, FieldTitle } from '@yeutech/ra-core';
 
@@ -154,19 +158,19 @@ export class SelectInput extends Component {
     renderMenuItem = choice => {
         const { optionValue } = this.props;
         return (
-            <MenuItem
+            <Option
                 key={get(choice, optionValue)}
                 value={get(choice, optionValue)}
             >
                 {this.renderMenuItemOption(choice)}
-            </MenuItem>
+            </Option>
         );
     };
 
     render() {
         const {
             choices,
-            classes,
+					  classNameInput,
             className,
             isRequired,
             label,
@@ -175,6 +179,7 @@ export class SelectInput extends Component {
             resource,
             source,
             allowEmpty,
+            size,
             ...rest
         } = this.props;
         if (typeof meta === 'undefined') {
@@ -185,27 +190,28 @@ export class SelectInput extends Component {
         const { touched, error, helperText = false } = meta;
 
         return (
-            <TextField
-                select
-                margin="normal"
-                value={this.state.value}
-                label={
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                }
-                className={`${classes.input} ${className}`}
-                error={!!(touched && error)}
-                helperText={(touched && error) || helperText}
-                {...options}
-                {...sanitizeRestProps(rest)}
-                onChange={this.handleChange}
-            >
-                {this.addAllowEmpty(choices.map(this.renderMenuItem))}
-            </TextField>
+            <FormGroup color={meta.error ? 'danger' : ''} className={className}>
+                <FieldTitle
+                    label={label}
+                    source={source}
+                    resource={resource}
+                    isRequired={isRequired}
+                />
+                <Input
+                  value={this.state.value}
+                    onChange={this.handleChange}
+                    type="select"
+                    size={size}
+                    className={classNameInput}
+                    {...options}
+                    {...sanitizeRestProps(rest)}
+                >
+                    <Option value="" />
+                    {this.addAllowEmpty(choices.map(this.renderMenuItem))}
+                </Input>
+                {touched && error && <FormFeedback>{error}</FormFeedback>}
+                {helperText && <FormFeedback>{helperText}</FormFeedback>}
+            </FormGroup>
         );
     }
 }

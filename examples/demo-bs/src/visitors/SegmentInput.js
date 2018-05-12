@@ -1,13 +1,10 @@
 import React from 'react';
-import { translate, SelectInput } from '@yeutech/react-admin-bs';
-import withStyles from 'material-ui/styles/withStyles';
+import { translate } from '@yeutech/react-admin-bs';
+import { SelectInput } from '@yeutech/ra-ui-bootstrap-styled';
+
 import compose from 'recompose/compose';
 
 import segments from '../segments/data';
-
-const styles = {
-    input: { width: 150 },
-};
 
 const SegmentInput = ({ classes, translate, ...rest }) => (
     <SelectInput
@@ -16,11 +13,10 @@ const SegmentInput = ({ classes, translate, ...rest }) => (
             id: segment.id,
             name: translate(segment.name),
         }))}
-        className={classes.input}
     />
 );
 
-const TranslatedSegmentInput = compose(translate, withStyles(styles))(
+const TranslatedSegmentInput = compose(translate)(
     SegmentInput
 );
 

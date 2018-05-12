@@ -51,7 +51,7 @@ class DatagridRow extends Component {
 				{...sanitizeRestProps(rest)}
       >
 				{hasBulkActions && (
-          <Td style={{ verticalAlign: 'middle' }}>
+          <Td style={{ verticalAlign: 'middle'}}>
               <Form>
                   <FormGroup className="mb-0">
                       <FormCustom

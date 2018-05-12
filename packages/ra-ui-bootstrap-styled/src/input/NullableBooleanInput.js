@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
 import Input from 'bootstrap-styled/lib/Input';
@@ -9,10 +8,6 @@ import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import { addField, translate, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
-
-const styles = theme => ({
-    input: { width: theme.spacing.unit * 16 },
-});
 
 export class NullableBooleanInput extends Component {
     state = {
@@ -46,7 +41,6 @@ export class NullableBooleanInput extends Component {
 
     render() {
         const {
-            classes,
             className,
             isRequired,
             label,
@@ -95,7 +89,6 @@ export class NullableBooleanInput extends Component {
 }
 
 NullableBooleanInput.propTypes = {
-    classes: PropTypes.object,
     className: PropTypes.string,
     input: PropTypes.object,
     isRequired: PropTypes.bool,
@@ -107,6 +100,6 @@ NullableBooleanInput.propTypes = {
     translate: PropTypes.func.isRequired,
 };
 
-const enhance = compose(addField, translate, withStyles(styles));
+const enhance = compose(addField, translate);
 
 export default enhance(NullableBooleanInput);

@@ -37,7 +37,7 @@ export const DatagridHeaderCell = ({
                   tag='span'
                   outline
                   color="secondary"
-                  className="border-0"
+                  className="border-0 w-100 rounded-0"
                   active={field.props.source === currentSort.field}
                   onClick={updateSort}
                   data-sort={field.props.source}

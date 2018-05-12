@@ -108,6 +108,14 @@ const resourcesMessages = defineMessages({
         id: 'resources.customers.fields.total_spent',
         defaultMessage: 'Total spent',
     },
+    customersFieldsHasNewsletter: {
+        id: 'resources.customers.fields.has_newsletter',
+        defaultMessage: 'Newsletter?',
+    },
+	  customersFieldsHasOrdered: {
+        id: 'resources.customers.fields.has_ordered',
+        defaultMessage: 'Ordered before?',
+    },
     customersTabsIdentity: {
         id: 'resources.customers.tabs.identity',
         defaultMessage: 'Identity',
