@@ -63,6 +63,7 @@ class DatagridRow extends Component {
               </Form>
           </Td>
 				)}
+				{console.log(record, 'record')}
 				{React.Children.map(
 					children,
 					(field, index) =>

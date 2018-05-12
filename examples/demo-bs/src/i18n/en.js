@@ -76,6 +76,18 @@ const resourcesMessages = defineMessages({
         defaultMessage:
             '{smart_count, plural, one {Customer} other {Customers}}',
     },
+    customersFieldsFirstName: {
+        id: 'resources.customers.fields.first_name',
+        defaultMessage: 'First name',
+    },
+	customersFieldsLastName: {
+        id: 'resources.customers.fields.last_name',
+        defaultMessage: 'Last name',
+    },
+    customersFieldsEmail: {
+        id: 'resources.customers.fields.email',
+        defaultMessage: 'Email',
+    },
     customersFieldsCustomerId: {
         id: 'resources.customers.fields.customer_id',
         defaultMessage: 'Customers',
@@ -179,6 +191,10 @@ const resourcesMessages = defineMessages({
     commandsFieldsDateGte: {
         id: 'resources.commands.fields.date_gte',
         defaultMessage: 'Passed Since',
+    },
+    commandsFieldsDate: {
+        id: 'resources.commands.fields.date',
+        defaultMessage: 'Date',
     },
     commandsFieldsDateLte: {
         id: 'resources.commands.fields.date_lte',
