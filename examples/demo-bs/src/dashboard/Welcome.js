@@ -14,17 +14,17 @@ export default translate(({ translate }) => (
             <H2>
                 {translate('pos.dashboard.welcome.title')}
             </H2>
-            <P lead>
+            <P>
                 {translate('pos.dashboard.welcome.subtitle')}
             </P>
         </CardBlock>
         <CardBlock className="d-flex justify-content-end">
-            <Button outline href="https://marmelab.com/react-admin" className="mr-2">
-                <Fa home style={{ paddingRight: '0.5em' }} />
+            <Button color="info" href="https://marmelab.com/react-admin" className="mr-2" style={{ textDecoration: 'none' }}>
+                <Fa home className="pr-2" />
                 {translate('pos.dashboard.welcome.aor_button')}
             </Button>
-            <Button outline href="https://github.com/yeutech/react-admin">
-                <Fa code style={{ paddingRight: '0.5em' }} />
+            <Button color="success" href="https://github.com/yeutech/react-admin" style={{ textDecoration: 'none' }}>
+                <Fa code className="pr-2" />
                 {translate('pos.dashboard.welcome.demo_button')}
             </Button>
         </CardBlock>

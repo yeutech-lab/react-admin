@@ -17,7 +17,6 @@ import StarRatingField from '../reviews/StarRatingField';
 
 const styles = theme => ({
     titleLink: { textDecoration: 'none', color: 'inherit' },
-    card: { borderLeft: 'solid 4px #f44336', flex: 1, marginRight: '1em' },
     icon: {
         float: 'right',
         width: 64,
@@ -49,8 +48,8 @@ const PendingReviews = ({
     translate,
     classes,
 }) => (
-    <Card className={classes.card}>
-        <CardBlock>
+    <Card style={{ borderLeft: 'solid 4px #f44336', flex: 1, marginRight: '1em' }}>
+        <CardBlock style={{ height: '60px' }}>
             <CommentIcon className={classes.icon} />
             <CardTitle>
                 <Link to={location} className={classes.titleLink}>

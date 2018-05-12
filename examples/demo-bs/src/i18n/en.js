@@ -76,6 +76,18 @@ const resourcesMessages = defineMessages({
         defaultMessage:
             '{smart_count, plural, one {Customer} other {Customers}}',
     },
+    customersFieldsCustomerId: {
+        id: 'resources.customers.fields.customer_id',
+        defaultMessage: 'Customers',
+    },
+    customersFieldsLastSeen: {
+        id: 'resources.customers.fields.last_seen',
+        defaultMessage: 'Last seen',
+    },
+    customersFieldsLatestPurchase: {
+        id: 'resources.customers.fields.latest_purchase',
+        defaultMessage: 'Latest purchase',
+    },
     customersFieldsCommands: {
         id: 'resources.customers.fields.commands',
         defaultMessage: 'Orders',

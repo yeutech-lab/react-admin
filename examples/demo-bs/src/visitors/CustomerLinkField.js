@@ -5,6 +5,7 @@ import FullNameField from './FullNameField';
 
 const CustomerLinkField = props => (
     <Link to={`/customers/${props.record.id}`}>
+      {console.log(props, 'props')}
         <FullNameField {...props} />
     </Link>
 );
