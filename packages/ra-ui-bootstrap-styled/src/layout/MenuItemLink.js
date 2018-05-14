@@ -1,9 +1,20 @@
 import React, { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { MenuItem } from 'material-ui/Menu';
-import { withStyles } from 'material-ui/styles';
+import ListGroupItem from 'bootstrap-styled/lib/ListGroup/ListGroupItem';
+
+const Opacity = styled.div `
+    transition: opacity .15s ease-in-out;
+    opacity: 0;
+    display: none;
+    &.active {
+        opacity: 1;
+        display: block;
+    }
+`;
 
 const styles = theme => ({
     root: {
@@ -19,12 +30,12 @@ const styles = theme => ({
 
 export class MenuItemLink extends Component {
     static propTypes = {
-        classes: PropTypes.object.isRequired,
         className: PropTypes.string,
         leftIcon: PropTypes.node,
         onClick: PropTypes.func,
         primaryText: PropTypes.string,
         staticContext: PropTypes.object,
+			  sidebarOpen: PropTypes.bool,
         to: PropTypes.string.isRequired,
     };
 
@@ -34,31 +45,37 @@ export class MenuItemLink extends Component {
 
     render() {
         const {
-            classes,
             className,
             primaryText,
             leftIcon,
             staticContext,
+					  sidebarOpen,
             ...props
         } = this.props;
 
         return (
-            <MenuItem
-                className={classnames(classes.root, className)}
-                activeClassName={classes.active}
-                component={NavLink}
+            <ListGroupItem
+                className={classnames(className, 'border-0 rounded-0 d-flex flex-start')}
+                style={{ textDecoration: 'none', transition: 'all .5s ease-in-out' }}
+                action
+                tag={NavLink}
                 {...props}
                 onClick={this.handleMenuTap}
             >
                 {leftIcon && (
-                    <span className={classes.icon}>
+                    <span className="pr-3 d-flex">
                         {cloneElement(leftIcon, { titleAccess: primaryText })}
                     </span>
                 )}
-                {primaryText}
-            </MenuItem>
+                <Opacity className={ sidebarOpen && 'active'}>{primaryText}</Opacity>
+            </ListGroupItem>
         );
     }
 }
 
-export default withStyles(styles)(MenuItemLink);
+
+const mapStateToProps = state => ({
+	sidebarOpen: state.admin.ui.sidebarOpen,
+});
+
+export default connect(mapStateToProps)(MenuItemLink);

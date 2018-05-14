@@ -9,6 +9,7 @@ import {
     MenuItemLink,
     Responsive,
 } from '@yeutech/react-admin-bs';
+import ListGroup from 'bootstrap-styled/lib/ListGroup';
 import { withRouter } from 'react-router-dom';
 
 import { VisitorIcon } from './visitors';
@@ -26,17 +27,9 @@ const items = [
     { name: 'reviews', icon: <ReviewIcon /> },
 ];
 
-const styles = {
-    main: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        height: '100%',
-    },
-};
-
 const Menu = ({ onMenuClick, translate, logout }) => (
-    <div style={styles.main}>
+    <div className="d-flex flex-column flex-start h-100">
+      <ListGroup>
         <DashboardMenuItem onClick={onMenuClick} />
         {items.map(item => (
             <MenuItemLink
@@ -56,6 +49,7 @@ const Menu = ({ onMenuClick, translate, logout }) => (
             onClick={onMenuClick}
         />
         <Responsive xsmall={logout} medium={null} />
+      </ListGroup>
     </div>
 );
 

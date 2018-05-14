@@ -50,4 +50,10 @@ v['$container-max-widths'] = {
 };
 
 
+// 8. ListGroup
+
+v['$list-group-active-bg'] = 'transparent';
+v['$list-group-active-color'] = v['$brand-primary'];
+v['$list-group-bg'] = 'transparent';
+
 export default v;
