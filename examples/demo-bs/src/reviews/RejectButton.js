@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Button from 'material-ui/Button';
+import Button from 'bootstrap-styled/lib/Button';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import { translate } from '@yeutech/react-admin-bs';
 import compose from 'recompose/compose';

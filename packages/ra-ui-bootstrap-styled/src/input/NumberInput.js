@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import Input from 'bootstrap-styled/lib/Input';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import { addField, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
@@ -58,6 +60,9 @@ export class NumberInput extends Component {
             source,
             step,
             resource,
+					  classNameInput,
+            size,
+					  labelHidden,
             ...rest
         } = this.props;
         if (typeof meta === 'undefined') {
@@ -68,28 +73,27 @@ export class NumberInput extends Component {
         const { touched, error } = meta;
 
         return (
-            <TextField
-                type="number"
-                margin="normal"
-                error={!!(touched && error)}
-                helperText={touched && error}
+          <FormGroup color={error ? 'danger' : ''} className={className} {...sanitizeRestProps(rest)}>
+              <FieldTitle
+                label={label}
+                source={source}
+                resource={resource}
+                isRequired={isRequired}
+                labelHidden={labelHidden}
+              />
+              <Input
+                type='number'
+								{...input}
+								{...options}
                 step={step}
-                label={
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                }
-                className={className}
-                {...options}
-                {...sanitizeRestProps(rest)}
-                {...input}
                 onBlur={this.handleBlur}
                 onFocus={this.handleFocus}
                 onChange={this.handleChange}
-            />
+                size={size}
+                className={classNameInput}
+              />
+						{error && <FormFeedback>{error}</FormFeedback>}
+          </FormGroup>
         );
     }
 }

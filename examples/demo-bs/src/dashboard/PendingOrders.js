@@ -40,7 +40,7 @@ const PendingOrders = ({ orders = [], customers = {}, translate, classes }) => (
                 <ListGroupItem
                     key={record.id}
                     action
-                    component={Link}
+                    tag={Link}
                     to={`/commands/${record.id}`}
                     className="border-0 rounded-0"
                 >
