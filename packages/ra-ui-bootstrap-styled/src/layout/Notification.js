@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Snackbar from 'material-ui/Snackbar';
-import Button from 'material-ui/Button';
+import Alert from 'bootstrap-styled/lib/Alert';
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
@@ -71,41 +70,22 @@ class Notification extends React.Component {
             hideNotification,
             ...rest
         } = this.props;
-
+console.log("NOTIVVVV'")
         return (
-            <Snackbar
-                open={this.state.open}
-                message={
-                    notification &&
-                    notification.message &&
-                    translate(notification.message, notification.messageArgs)
-                }
+            <Alert
+                className={className}
+                isOpen={this.state.open}
                 autoHideDuration={
                     (notification && notification.autoHideDuration) ||
                     autoHideDuration
                 }
                 onExited={this.handleExited}
-                onClose={this.handleRequestClose}
-                SnackbarContentProps={{
-                    className: classnames(
-                        classes[(notification && notification.type) || type],
-                        className
-                    ),
-                }}
-                action={
-                    notification && notification.undoable ? (
-                        <Button
-                            color="primary"
-                            className={classes.undo}
-                            size="small"
-                            onClick={undo}
-                        >
-                            {translate('ra.action.undo')}
-                        </Button>
-                    ) : null
-                }
+                onClick={this.handleRequestClose}
+                color={type}
                 {...rest}
-            />
+            >
+                {notification && notification.message && translate(notification.message, notification.messageArgs)}
+            </Alert>
         );
     }
 }
