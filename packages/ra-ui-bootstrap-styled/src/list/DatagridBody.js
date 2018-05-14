@@ -18,7 +18,7 @@ const DatagridBody = ({
     data,
     selectedIds,
     styles,
-    rowStyle,
+    rowClassName,
     onToggleItem,
     version,
     ...rest
@@ -27,7 +27,7 @@ const DatagridBody = ({
         {ids.map((id, rowIndex) => (
             <DatagridRow
                 basePath={basePath}
-                // TODO: check how mateiralUI uses rowEven and odds with modulo
+                // AJT TODO: check how mateiralUI uses rowEven and odds with modulo
                 className={className}
                 hasBulkActions={hasBulkActions}
                 id={id}
@@ -37,7 +37,7 @@ const DatagridBody = ({
                 resource={resource}
                 selected={selectedIds.includes(id)}
                 hover={hover}
-                style={rowStyle ? rowStyle(data[id], rowIndex) : null}
+                rowClassName={rowClassName ? rowClassName(data[id]) : null}
             >
                 {children}
             </DatagridRow>
@@ -56,7 +56,7 @@ DatagridBody.propTypes = {
     isLoading: PropTypes.bool,
     onToggleItem: PropTypes.func,
     resource: PropTypes.string,
-    rowStyle: PropTypes.func,
+	  rowClassName: PropTypes.func,
     selectedIds: PropTypes.arrayOf(PropTypes.any).isRequired,
     styles: PropTypes.object,
     version: PropTypes.number,

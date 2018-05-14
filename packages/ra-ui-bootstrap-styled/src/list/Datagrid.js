@@ -78,7 +78,7 @@ class Datagrid extends Component {
             ids,
             isLoading,
             resource,
-            rowStyle,
+            rowClassName,
             selectedIds,
             setSort,
             onSelect,
@@ -139,7 +139,7 @@ class Datagrid extends Component {
                     isLoading={isLoading}
                     onToggleItem={onToggleItem}
                     resource={resource}
-                    rowStyle={rowStyle}
+                    rowClassName={rowClassName}
                     selectedIds={selectedIds}
                     version={version}
                 >

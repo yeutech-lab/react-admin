@@ -18,7 +18,7 @@ const sanitizeRestProps = ({
 														 record,
 														 basePath,
 														 selected,
-														 styles,
+														 rowClassName,
 														 style,
 														 onToggleItem,
 														 ...rest
@@ -41,19 +41,20 @@ class DatagridRow extends Component {
 			resource,
 			selected,
 			style,
+			rowClassName,
 			...rest
 		} = this.props;
 
 		return (
       <Tr
-        className={className}
+        color={classnames(className, rowClassName)}
         key={id}
 				{...sanitizeRestProps(rest)}
       >
 				{hasBulkActions && (
           <Td style={{ verticalAlign: 'middle'}}>
               <Form>
-                  <FormGroup className="mb-0">
+								<FormGroup className="mb-0">
                       <FormCustom
                         className="select-item cursor-pointer"
                         checked={selected}
