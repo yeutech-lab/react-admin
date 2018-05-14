@@ -1,6 +1,6 @@
 const rowClassName = (record, defaultStyle = {}) => {
     if (record.status === 'accepted')
-        return 'active';
+        return 'success';
     if (record.status === 'pending')
 			  return 'warning';
     if (record.status === 'rejected')
