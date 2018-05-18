@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import Drawer from 'material-ui/Drawer';
+import Drawer from 'bootstrap-styled/lib/Drawer';
 import { withStyles } from 'material-ui/styles';
 import withWidth from 'material-ui/utils/withWidth';
 import classnames from 'classnames';
@@ -69,8 +69,8 @@ class Sidebar extends PureComponent {
             <Responsive
                 xsmall={
                     <Drawer
-                        variant="temporary"
-                        open={open}
+                        active={open}
+                        left="260px"
                         classes={{
                             paper: classes.drawerPaper,
                         }}
@@ -84,8 +84,9 @@ class Sidebar extends PureComponent {
                 }
                 small={
                     <Drawer
-                        variant="permanent"
-                        open={open}
+                        docked
+                        left="260px"
+                        active={open}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,
@@ -103,8 +104,10 @@ class Sidebar extends PureComponent {
                 }
                 medium={
                     <Drawer
-                        variant="permanent"
-                        open={open}
+                        docked
+                        left="260px"
+                        active={open}
+                        style={{ marginTop: '4rem' }}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,

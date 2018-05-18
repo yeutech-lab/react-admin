@@ -8,12 +8,6 @@ import ListGroupItem from 'bootstrap-styled/lib/ListGroup/ListGroupItem';
 
 const Opacity = styled.div `
     transition: opacity .15s ease-in-out;
-    opacity: 0;
-    display: none;
-    &.active {
-        opacity: 1;
-        display: block;
-    }
 `;
 
 const styles = theme => ({
@@ -52,7 +46,6 @@ export class MenuItemLink extends Component {
 					  sidebarOpen,
             ...props
         } = this.props;
-
         return (
             <ListGroupItem
                 className={classnames(className, 'border-0 rounded-0 d-flex flex-start')}
@@ -67,7 +60,7 @@ export class MenuItemLink extends Component {
                         {cloneElement(leftIcon, { titleAccess: primaryText })}
                     </span>
                 )}
-                <Opacity className={ sidebarOpen && 'active'}>{primaryText}</Opacity>
+                <div className={!sidebarOpen ? 'd-none' : null}>{primaryText}</div>
             </ListGroupItem>
         );
     }
