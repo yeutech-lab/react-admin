@@ -34,8 +34,8 @@ const listStyles = theme => ({
 });
 
 const MobileGrid = withStyles(listStyles)(
-    translate(({ classes, ids, data, basePath, translate }) => (
-        <div style={{ margin: '1em' }}>
+    translate(({ classes, ids, data, basePath, translate, className }) => (
+        <div style={{ margin: '1em' }} className={className}>
             {ids.map(id => (
                 <Card key={id} color={rowClassName(data[id])}>
                     <CardTitle>

@@ -8,3 +8,4 @@ export * from './layout';
 export * from './list';
 export Link from './Link';
 export defaultTheme from './defaultTheme';
+export * from './extendMui';
