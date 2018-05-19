@@ -3,24 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import inflection from 'inflection';
 import compose from 'recompose/compose';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 import { getResources, translate } from '@yeutech/ra-core';
 import DefaultIcon from '@material-ui/icons/ViewList';
-
 import DashboardMenuItem from './DashboardMenuItem';
 import MenuItemLink from './MenuItemLink';
 import Responsive from '../layout/Responsive';
 import { DRAWER_WIDTH } from './Sidebar';
-
-const styles = {
-    main: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        width: DRAWER_WIDTH,
-    },
-};
 
 const translatedResourceName = (resource, translate) =>
     translate(`resources.${resource.name}.name`, {
@@ -46,7 +35,7 @@ const Menu = ({
     logout,
     ...rest
 }) => (
-    <div className={classnames(classes.main, className)} {...rest}>
+    <div className={classnames(className, 'd-flex flex-column flex-start')} style={{ width: DRAWER_WIDTH}} {...rest}>
         {hasDashboard && <DashboardMenuItem onClick={onMenuClick} />}
         {resources
             .filter(r => r.hasList)
@@ -100,7 +89,6 @@ const enhance = compose(
                 ) && prev.pathname == next.pathname,
         }
     ),
-    withStyles(styles)
 );
 
 export default enhance(Menu);

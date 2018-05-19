@@ -10,7 +10,7 @@ import { setSidebarVisibility } from '@yeutech/ra-core';
 
 import Responsive from './Responsive';
 
-export const DRAWER_WIDTH = 240;
+export const DRAWER_WIDTH = '260px';
 
 const styles = theme => ({
     drawerPaper: {
@@ -70,7 +70,8 @@ class Sidebar extends PureComponent {
                 xsmall={
                     <Drawer
                         active={open}
-                        left="260px"
+                        left={DRAWER_WIDTH}
+                        style={{ top: '45px' }}
                         classes={{
                             paper: classes.drawerPaper,
                         }}
@@ -85,8 +86,9 @@ class Sidebar extends PureComponent {
                 small={
                     <Drawer
                         docked
-                        left="260px"
+                        left={DRAWER_WIDTH}
                         active={open}
+                        style={{ marginTop: '4rem' }}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,
@@ -105,7 +107,7 @@ class Sidebar extends PureComponent {
                 medium={
                     <Drawer
                         docked
-                        left="260px"
+                        left={DRAWER_WIDTH}
                         active={open}
                         style={{ marginTop: '4rem' }}
                         classes={{
