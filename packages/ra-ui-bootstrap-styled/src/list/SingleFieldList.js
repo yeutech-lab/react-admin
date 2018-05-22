@@ -1,14 +1,9 @@
 import React, { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { withStyles } from 'material-ui/styles';
 import { linkToRecord } from '@yeutech/ra-core';
 
 import Link from '../Link';
-
-const styles = {
-    root: { display: 'flex', flexWrap: 'wrap' },
-};
 
 const sanitizeRestProps = ({ currentSort, isLoading, ...props }) => props;
 
@@ -52,7 +47,6 @@ export class SingleFieldList extends Component {
     handleClick = () => {};
     render() {
         const {
-            classes = {},
             className,
             ids,
             data,
@@ -65,7 +59,7 @@ export class SingleFieldList extends Component {
 
         return (
             <div
-                className={classnames(classes.root, className)}
+                className={classnames(className, 'd-flex flex-wrap')}
                 {...sanitizeRestProps(rest)}
             >
                 {ids.map(id => {
@@ -76,7 +70,7 @@ export class SingleFieldList extends Component {
                     if (resourceLinkPath) {
                         return (
                             <Link
-                                className={classnames(classes.link, className)}
+                                className='link'
                                 key={id}
                                 to={resourceLinkPath}
                             >
@@ -106,7 +100,6 @@ export class SingleFieldList extends Component {
 SingleFieldList.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.element.isRequired,
-    classes: PropTypes.object,
     className: PropTypes.string,
     data: PropTypes.object,
     ids: PropTypes.array,
@@ -116,8 +109,7 @@ SingleFieldList.propTypes = {
 };
 
 SingleFieldList.defaultProps = {
-    classes: {},
     linkType: 'edit',
 };
 
-export default withStyles(styles)(SingleFieldList);
+export default SingleFieldList;
