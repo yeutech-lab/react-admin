@@ -99,6 +99,9 @@ TextInput.propTypes = {
     resource: PropTypes.string,
     source: PropTypes.string,
     type: PropTypes.string,
+		labelHidden: PropTypes.bool,
+		size: PropTypes.string,
+		classNameInput: PropTypes.string,
 };
 
 TextInput.defaultProps = {

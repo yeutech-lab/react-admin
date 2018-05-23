@@ -45,7 +45,6 @@ class DatagridRow extends Component {
 			...rest
 		} = this.props;
 
-		console.log(selected)
 		return (
       <Tr
         color={classnames(className, rowClassName)}

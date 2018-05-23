@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from '';
+import Input from 'bootstrap-styled/lib/Input';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
 import { addField, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';

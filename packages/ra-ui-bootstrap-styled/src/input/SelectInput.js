@@ -126,7 +126,7 @@ export class SelectInput extends Component {
 
     addAllowEmpty = choices => {
         if (this.props.allowEmpty) {
-            return [<MenuItem value={null} key="null" />, ...choices];
+            return [<Option value={null} key="null" />, ...choices];
         }
 
         return choices;
@@ -197,7 +197,6 @@ export class SelectInput extends Component {
                     {...options}
                     {...sanitizeRestProps(rest)}
                 >
-                    <Option value="" />
                     {this.addAllowEmpty(choices.map(this.renderMenuItem))}
                 </Input>
                 {touched && error && <FormFeedback>{error}</FormFeedback>}
