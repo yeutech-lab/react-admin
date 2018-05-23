@@ -78,6 +78,7 @@ export class FilterButton extends Component {
                                 filter={filterElement.props}
                                 resource={resource}
                                 onShow={this.handleShow}
+                                className="cursor-pointer"
                             />
                         ))}
                     </DropdownMenu>
