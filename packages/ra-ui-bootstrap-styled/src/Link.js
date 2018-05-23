@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RRLink } from 'react-router-dom';
+import composeLink from 'bootstrap-styled/lib/A/composeLink';
+
+const LinkBs = composeLink(RRLink);
 
 const Link = ({ to, children, className }) => (
-    <RRLink to={to} className={className} style={{ textDecoration: 'none' }}>
+    <LinkBs to={to} className={className}>
         {children}
-    </RRLink>
+    </LinkBs>
 );
 Link.propTypes = {
     className: PropTypes.string,
