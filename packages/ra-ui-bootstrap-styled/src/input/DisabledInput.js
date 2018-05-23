@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import Input from '';
 import { addField, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
@@ -14,29 +14,38 @@ const DisabledInput = ({
     resource,
     source,
     options,
+    // Our props
+    labelHidden,
+    classNameInput,
+    size,
     ...rest
 }) => (
-    <TextField
-        disabled
-        margin="normal"
-        value={value}
-        label={<FieldTitle label={label} source={source} resource={resource} />}
-        className={className}
-        classes={classes}
-        {...options}
-        {...sanitizeRestProps(rest)}
-    />
+    <FormGroup className={className} {...sanitizeRestProps(rest)}>
+        <FieldTitle
+            label={label}
+            source={source}
+            resource={resource}
+            labelHidden={labelHidden}
+        />
+        <Input
+            {...input}
+            size={size}
+            className={classNameInput}
+            readOnly
+        />
+    </FormGroup>
 );
 
 DisabledInput.propTypes = {
-    classes: PropTypes.object,
     className: PropTypes.string,
     label: PropTypes.string,
     input: PropTypes.object,
-    options: PropTypes.object,
     record: PropTypes.object,
     resource: PropTypes.string,
     source: PropTypes.string,
+    labelHidden: PropTypes.bool,
+    classNameInput: PropTypes.string,
+	  size: PropTypes.string,
 };
 
 export default addField(DisabledInput);
