@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import TextField from 'material-ui/TextField';
-import { MenuItem } from 'material-ui/Menu';
-import { withStyles } from 'material-ui/styles';
 import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
 import Input from 'bootstrap-styled/lib/Input';
 import Option from 'bootstrap-styled/lib/Option';
@@ -49,12 +46,6 @@ const sanitizeRestProps = ({
     validation,
     ...rest
 }) => rest;
-
-const styles = theme => ({
-    input: {
-        minWidth: theme.spacing.unit * 20,
-    },
-});
 
 /**
  * An Input component for a select box, using an array of objects for the options
@@ -219,7 +210,6 @@ export class SelectInput extends Component {
 SelectInput.propTypes = {
     allowEmpty: PropTypes.bool.isRequired,
     choices: PropTypes.arrayOf(PropTypes.object),
-    classes: PropTypes.object,
     className: PropTypes.string,
     input: PropTypes.object,
     isRequired: PropTypes.bool,
@@ -240,7 +230,6 @@ SelectInput.propTypes = {
 
 SelectInput.defaultProps = {
     allowEmpty: false,
-    classes: {},
     choices: [],
     options: {},
     optionText: 'name',
@@ -248,4 +237,4 @@ SelectInput.defaultProps = {
     translateChoice: true,
 };
 
-export default compose(addField, translate, withStyles(styles))(SelectInput);
+export default compose(addField, translate)(SelectInput);
