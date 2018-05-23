@@ -114,7 +114,7 @@ export class FilterForm extends Component {
         } = this.props;
 
         return (
-          <Form inline className={classnames(className, 'justify-content-end align-items-end flex-wrap')} {...sanitizeRestProps(rest)}>
+          <Form inline className={classnames(className, 'justify-content-around justify-content-sm-end align-items-md-center')} {...sanitizeRestProps(rest)}>
             {this.getShownFilters()
                 .reverse()
                 .map(filterElement => (
