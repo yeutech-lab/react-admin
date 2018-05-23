@@ -88,7 +88,6 @@ class Sidebar extends PureComponent {
                         docked
                         left={DRAWER_WIDTH}
                         active={open}
-                        style={{ marginTop: '4rem' }}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,
@@ -109,7 +108,6 @@ class Sidebar extends PureComponent {
                         docked
                         left={DRAWER_WIDTH}
                         active={open}
-                        style={{ marginTop: '4rem' }}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,
