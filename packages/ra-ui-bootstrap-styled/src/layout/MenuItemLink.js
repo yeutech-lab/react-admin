@@ -6,22 +6,6 @@ import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import ListGroupItem from 'bootstrap-styled/lib/ListGroup/ListGroupItem';
 
-const Opacity = styled.div `
-    transition: opacity .15s ease-in-out;
-`;
-
-const styles = theme => ({
-    root: {
-        color: theme.palette.text.secondary,
-        display: 'flex',
-        alignItems: 'flex-start',
-    },
-    active: {
-        color: theme.palette.text.primary,
-    },
-    icon: { paddingRight: '1.2em' },
-});
-
 export class MenuItemLink extends Component {
     static propTypes = {
         className: PropTypes.string,
