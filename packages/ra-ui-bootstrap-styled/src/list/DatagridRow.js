@@ -45,6 +45,7 @@ class DatagridRow extends Component {
 			...rest
 		} = this.props;
 
+		console.log(selected)
 		return (
       <Tr
         color={classnames(className, rowClassName)}
@@ -53,15 +54,16 @@ class DatagridRow extends Component {
       >
 				{hasBulkActions && (
           <Td style={{ verticalAlign: 'middle'}}>
-              <Form>
-								<FormGroup className="mb-0">
-                      <FormCustom
-                        className="select-item cursor-pointer"
-                        checked={selected}
-                        onClick={this.handleToggle}
-                      />
-                  </FormGroup>
-              </Form>
+							<FormGroup className="mb-0">
+								<Label check>
+									<Input
+										type="checkbox"
+										className="select-item cursor-pointer"
+										checked={selected}
+										onClick={this.handleToggle}
+									/>
+								</Label>
+								</FormGroup>
           </Td>
 				)}
 				{React.Children.map(
