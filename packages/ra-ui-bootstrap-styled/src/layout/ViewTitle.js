@@ -10,7 +10,7 @@ const ViewTitle = ({ className, title, ...rest }) => (
     <Responsive
         xsmall={
             <AppBarMobile
-                className={classnames('title', className)}
+                className={classnames('title w-100', className)}
                 title={title}
                 {...rest}
             />

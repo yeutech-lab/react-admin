@@ -12,7 +12,7 @@ export const Header = ({
     actionProps,
     ...rest
 }) => (
-    <CardHeader className={classnames('d-flex justify-content-between mb-0 align-items-center rounded-bottom-0', className)} {...rest}>
+    <CardHeader className={classnames('p-0 px-sm-3 py-sm-2 flex-column flex-sm-row d-flex justify-content-between mb-0 align-items-center rounded-bottom-0', className)} {...rest}>
         <ViewTitle title={title} />
         {actions && React.cloneElement(actions, actionProps)}
     </CardHeader>
