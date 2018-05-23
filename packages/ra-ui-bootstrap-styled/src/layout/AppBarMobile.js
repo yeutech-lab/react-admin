@@ -6,6 +6,8 @@ import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from 'material-ui/Typography';
+import Header from 'bootstrap-styled/lib/Header';
+
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
@@ -17,7 +19,8 @@ const styles = {
     bar: {
         height: '3em',
         top: 0,
-    },
+			  color: 'white',
+		},
     title: {
         fontSize: '1.25em',
         lineHeight: '2.5em',
@@ -49,8 +52,8 @@ const AppBarMobile = ({
     toggleSidebar,
     ...rest
 }) => (
-    <MuiAppBar
-        className={classnames(classes.bar, className)}
+    <Header
+        className={classnames(className, 'bg-info')}
         color="secondary"
         position="fixed"
         {...rest}
@@ -73,7 +76,7 @@ const AppBarMobile = ({
             </Typography>
             <LoadingIndicator className={classes.loadingIndicator} />
         </Toolbar>
-    </MuiAppBar>
+    </Header>
 );
 
 AppBarMobile.propTypes = {
