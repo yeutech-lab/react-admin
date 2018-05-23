@@ -2,8 +2,8 @@ import React, { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import { isRequired, FieldTitle } from '@yeutech/ra-core';
 import { FieldArray } from 'redux-form';
-import { FormControl } from 'material-ui/Form';
-import { InputLabel } from 'material-ui/Input';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import Label from 'bootstrap-styled/lib/Label';
 
 import sanitizeRestProps from './sanitizeRestProps';
 
@@ -65,27 +65,25 @@ export class ArrayInput extends Component {
         } = this.props;
 
         return (
-            <FormControl
-                fullWidth
-                margin="normal"
+            <FormGroup
                 className={className}
                 {...sanitizeRestProps(rest)}
             >
-                <InputLabel htmlFor={source} shrink>
+                <Label htmlFor={source}>
                     <FieldTitle
                         label={label}
                         source={source}
                         resource={resource}
                         isRequired={isRequired(validate)}
                     />
-                </InputLabel>
+                </Label>
                 <FieldArray
                     name={source}
                     component={this.renderFieldArray}
                     validate={validate}
                     isRequired={isRequired(validate)}
                 />
-            </FormControl>
+            </FormGroup>
         );
     }
 }
@@ -103,6 +101,5 @@ ArrayInput.propTypes = {
 
 ArrayInput.defaultProps = {
     options: {},
-    fullWidth: true,
 };
 export default ArrayInput;
