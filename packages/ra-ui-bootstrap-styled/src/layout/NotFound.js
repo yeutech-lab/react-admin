@@ -1,31 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'bootstrap-styled/lib/Button';
-import compose from 'recompose/compose';
 import classnames from 'classnames';
 
 import AppBarMobile from './AppBarMobile';
 import { translate } from '@yeutech/ra-core';
-
-const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        [theme.breakpoints.up('md')]: {
-            height: '100%',
-        },
-        [theme.breakpoints.down('sm')]: {
-            height: '100vh',
-            marginTop: '-3em',
-        },
-    },
-
-    toolbar: {
-        textAlign: 'center',
-        marginTop: '2em',
-    },
-});
 
 function goBack() {
     history.go(-1);
