@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Tr from 'bootstrap-styled/lib/Table/Tr';
 import Td from 'bootstrap-styled/lib/Table/Td';
-import FormCustom from 'bootstrap-styled/lib/Form/FormCustom';
+import Input from 'bootstrap-styled/lib/Input';
 import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
-import Form from 'bootstrap-styled/lib/Form';
+import Label from 'bootstrap-styled/lib/Label';
 import classnames from 'classnames';
 
 import DatagridCell from './DatagridCell';
