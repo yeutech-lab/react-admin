@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ActionList from '@material-ui/icons/List';
+import Fa from 'bootstrap-styled/lib/Fa';
 
 import Link from '../Link';
 import Button from './Button';
 
 const ListButton = ({ basePath = '', label = 'ra.action.list', ...rest }) => (
-    <Button component={Link} to={basePath} label={label} {...rest}>
-        <ActionList />
+    <Button tag={Link} to={basePath} label={label} {...rest}>
+      <Fa list-ul className="mr-1" />
     </Button>
 );
 

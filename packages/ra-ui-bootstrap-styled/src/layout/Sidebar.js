@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import Drawer from 'material-ui/Drawer';
+import Drawer from 'bootstrap-styled/lib/Drawer';
 import { withStyles } from 'material-ui/styles';
 import withWidth from 'material-ui/utils/withWidth';
 import classnames from 'classnames';
@@ -10,7 +10,7 @@ import { setSidebarVisibility } from '@yeutech/ra-core';
 
 import Responsive from './Responsive';
 
-export const DRAWER_WIDTH = 240;
+export const DRAWER_WIDTH = '260px';
 
 const styles = theme => ({
     drawerPaper: {
@@ -69,8 +69,9 @@ class Sidebar extends PureComponent {
             <Responsive
                 xsmall={
                     <Drawer
-                        variant="temporary"
-                        open={open}
+                        active={open}
+                        left={DRAWER_WIDTH}
+                        style={{ top: '45px' }}
                         classes={{
                             paper: classes.drawerPaper,
                         }}
@@ -84,8 +85,9 @@ class Sidebar extends PureComponent {
                 }
                 small={
                     <Drawer
-                        variant="permanent"
-                        open={open}
+                        docked
+                        left={DRAWER_WIDTH}
+                        active={open}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,
@@ -103,8 +105,9 @@ class Sidebar extends PureComponent {
                 }
                 medium={
                     <Drawer
-                        variant="permanent"
-                        open={open}
+                        docked
+                        left={DRAWER_WIDTH}
+                        active={open}
                         classes={{
                             paper: classnames(
                                 classes.drawerPaper,

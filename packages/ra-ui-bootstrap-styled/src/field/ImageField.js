@@ -1,20 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
+import Ul from 'bootstrap-styled/lib/Ul';
+import Li from 'bootstrap-styled/lib/Li';
+import Img from 'bootstrap-styled/lib/Img';
 import sanitizeRestProps from './sanitizeRestProps';
-
-const styles = {
-    list: {
-        display: 'flex',
-        listStyleType: 'none',
-    },
-    image: {
-        margin: '0.5rem',
-        maxHeight: '10rem',
-    },
-};
 
 export const ImageField = ({
     className,
@@ -32,8 +23,8 @@ export const ImageField = ({
 
     if (Array.isArray(sourceValue)) {
         return (
-            <ul
-                className={classnames(classes.list, className)}
+            <Ul
+                className={classnames('d-flex', className)}
                 {...sanitizeRestProps(rest)}
             >
                 {sourceValue.map((file, index) => {
@@ -41,17 +32,18 @@ export const ImageField = ({
                     const srcValue = get(file, src) || title;
 
                     return (
-                        <li key={index}>
-                            <img
+                        <Li key={index}>
+                            <Img
                                 alt={titleValue}
                                 title={titleValue}
                                 src={srcValue}
-                                className={classes.image}
+                                style={{ maxHeight: '10rem' }}
+                                className="m-1"
                             />
-                        </li>
+                        </Li>
                     );
                 })}
-            </ul>
+            </Ul>
         );
     }
 
@@ -82,4 +74,4 @@ ImageField.propTypes = {
     title: PropTypes.string,
 };
 
-export default withStyles(styles)(ImageField);
+export default ImageField;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import Input from 'bootstrap-styled/lib/Input';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import { addField, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
@@ -46,6 +48,10 @@ export class DateInput extends Component {
             options,
             source,
             resource,
+            // Our props
+            size,
+            classNameInput,
+            labelHidden,
             ...rest
         } = this.props;
         if (typeof meta === 'undefined') {
@@ -57,36 +63,32 @@ export class DateInput extends Component {
         const value = sanitizeValue(input.value);
 
         return (
-            <TextField
-                {...input}
-                className={className}
-                type="date"
-                margin="normal"
-                error={!!(touched && error)}
-                helperText={touched && error}
-                label={
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                }
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                {...options}
-                {...sanitizeRestProps(rest)}
-                value={value}
-                onChange={this.onChange}
-                onBlur={this.onBlur}
-            />
+            <FormGroup color={error ? 'danger' : ''} className={className} {...sanitizeRestProps(rest)}>
+                <FieldTitle
+                    label={label}
+                    source={source}
+                    resource={resource}
+                    isRequired={isRequired}
+                    labelHidden={labelHidden}
+                />
+                <Input
+                    type="date"
+                    {...input}
+                    {...options}
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                    onChange={this.handleChange}
+                    size={size}
+                    value={value}
+                    className={classNameInput}
+                />
+                {!!(touched && error) && <FormFeedback>{error}</FormFeedback>}
+            </FormGroup>
         );
     }
 }
 
 DateInput.propTypes = {
-    classes: PropTypes.object,
     className: PropTypes.string,
     input: PropTypes.object,
     isRequired: PropTypes.bool,
@@ -95,6 +97,9 @@ DateInput.propTypes = {
     options: PropTypes.object,
     resource: PropTypes.string,
     source: PropTypes.string,
+    labelHidden: PropTypes.bool,
+    size: PropTypes.string,
+    classNameInput: PropTypes.string,
 };
 
 DateInput.defaultProps = {

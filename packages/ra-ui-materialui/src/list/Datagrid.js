@@ -9,27 +9,6 @@ import classnames from 'classnames';
 import DatagridHeaderCell from './DatagridHeaderCell';
 import DatagridBody from './DatagridBody';
 
-const styles = {
-    table: {
-        tableLayout: 'auto',
-    },
-    tbody: {
-        height: 'inherit',
-    },
-    headerCell: {
-        padding: '0 12px',
-    },
-    checkbox: {
-        height: 'auto',
-    },
-    row: {},
-    rowEven: {},
-    rowOdd: {},
-    rowCell: {
-        padding: '0 12px',
-    },
-};
-
 /**
  * The Datagrid component renders a list of records as a table.
  * It is usually used as a child of the <List> and <ReferenceManyField> components.
@@ -105,9 +84,9 @@ class Datagrid extends Component {
         } = this.props;
 
         return (
-            <Table className={classnames(classes.table, className)} {...rest}>
+            <Table className={classnames(className)} {...rest}>
                 <TableHead>
-                    <TableRow className={classes.row}>
+                    <TableRow>
                         {hasBulkActions && (
                             <TableCell padding="none">
                                 <Checkbox
@@ -129,7 +108,6 @@ class Datagrid extends Component {
                             (field, index) =>
                                 field ? (
                                     <DatagridHeaderCell
-                                        className={classes.headerCell}
                                         currentSort={currentSort}
                                         field={field}
                                         isSorting={
@@ -146,7 +124,6 @@ class Datagrid extends Component {
                 </TableHead>
                 <DatagridBody
                     basePath={basePath}
-                    classes={classes}
                     data={data}
                     hasBulkActions={hasBulkActions}
                     hover={hover}
@@ -168,7 +145,6 @@ class Datagrid extends Component {
 Datagrid.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node.isRequired,
-    classes: PropTypes.object,
     className: PropTypes.string,
     currentSort: PropTypes.shape({
         sort: PropTypes.string,
@@ -195,4 +171,4 @@ Datagrid.defaultProps = {
     selectedIds: [],
 };
 
-export default withStyles(styles)(Datagrid);
+export default Datagrid;

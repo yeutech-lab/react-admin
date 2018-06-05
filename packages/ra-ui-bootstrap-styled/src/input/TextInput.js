@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import Input from 'bootstrap-styled/lib/Input';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import { addField, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
@@ -46,6 +48,9 @@ export class TextInput extends Component {
             resource,
             source,
             type,
+						labelHidden,
+						classNameInput,
+						size,
             ...rest
         } = this.props;
         if (typeof meta === 'undefined') {
@@ -53,30 +58,29 @@ export class TextInput extends Component {
                 "The TextInput component wasn't called within a redux-form <Field>. Did you decorate it and forget to add the addField prop to your component? See https://marmelab.com/react-admin/Inputs.html#writing-your-own-input-component for details."
             );
         }
-        const { touched, error } = meta;
+        const { error } = meta;
 
         return (
-            <TextField
-                margin="normal"
-                type={type}
-                label={
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                }
-                error={!!(touched && error)}
-                helperText={touched && error}
-                className={className}
-                {...options}
-                {...sanitizeRestProps(rest)}
-                {...input}
-                onBlur={this.handleBlur}
-                onFocus={this.handleFocus}
-                onChange={this.handleChange}
-            />
+					<FormGroup color={error ? 'danger' : ''} className={className} {...sanitizeRestProps(rest)}>
+						<FieldTitle
+							label={label}
+							source={source}
+							resource={resource}
+							isRequired={isRequired}
+							labelHidden={labelHidden}
+						/>
+						<Input
+							{...input}
+							{...options}
+							onBlur={this.handleBlur}
+							onFocus={this.handleFocus}
+							onChange={this.handleChange}
+							type={type}
+							size={size}
+							className={classNameInput}
+						/>
+						{error && <FormFeedback>{error}</FormFeedback>}
+					</FormGroup>
         );
     }
 }
@@ -95,6 +99,9 @@ TextInput.propTypes = {
     resource: PropTypes.string,
     source: PropTypes.string,
     type: PropTypes.string,
+		labelHidden: PropTypes.bool,
+		size: PropTypes.string,
+		classNameInput: PropTypes.string,
 };
 
 TextInput.defaultProps = {

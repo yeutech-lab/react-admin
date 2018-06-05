@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LinearProgress } from 'material-ui/Progress';
-import { withStyles } from 'material-ui/styles';
+import Progress from 'bootstrap-styled/lib/Progress';
+import ProgressBar from 'bootstrap-styled/lib/Progress/ProgressBar';
 import { ReferenceArrayFieldController } from '@yeutech/ra-core';
-
-const styles = {
-    progress: { marginTop: '1em' },
-};
 
 export const ReferenceArrayFieldView = ({
     children,
     className,
-    classes = {},
     data,
     ids,
     isLoading,
@@ -19,7 +14,11 @@ export const ReferenceArrayFieldView = ({
     referenceBasePath,
 }) => {
     if (isLoading) {
-        return <LinearProgress className={classes.progress} />;
+        return (
+            <Progress className="mt-2">
+                <ProgressBar valueNow={100} striped animated />
+            </Progress>
+        )
     }
 
     return React.cloneElement(children, {
@@ -34,7 +33,6 @@ export const ReferenceArrayFieldView = ({
 };
 
 ReferenceArrayFieldView.propTypes = {
-    classes: PropTypes.object,
     className: PropTypes.string,
     data: PropTypes.object,
     ids: PropTypes.array,
@@ -108,7 +106,7 @@ ReferenceArrayField.propTypes = {
     source: PropTypes.string.isRequired,
 };
 
-const EnhancedReferenceArrayField = withStyles(styles)(ReferenceArrayField);
+const EnhancedReferenceArrayField = ReferenceArrayField;
 
 EnhancedReferenceArrayField.defaultProps = {
     addLabel: true,

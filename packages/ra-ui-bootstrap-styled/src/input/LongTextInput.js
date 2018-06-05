@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import Input from 'bootstrap-styled/lib/Input';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
+import classnames from 'classnames';
 import { addField, FieldTitle } from '@yeutech/ra-core';
 
 import sanitizeRestProps from './sanitizeRestProps';
@@ -14,6 +17,9 @@ export const LongTextInput = ({
     options,
     source,
     resource,
+     // Our props
+    rows,
+    labelHidden,
     ...rest
 }) => {
     if (typeof meta === 'undefined') {
@@ -23,24 +29,22 @@ export const LongTextInput = ({
     }
     const { touched, error } = meta;
     return (
-        <TextField
-            {...input}
-            className={className}
-            multiline
-            margin="normal"
-            label={
-                <FieldTitle
-                    label={label}
-                    source={source}
-                    resource={resource}
-                    isRequired={isRequired}
-                />
-            }
-            error={!!(touched && error)}
-            helperText={touched && error}
-            {...sanitizeRestProps(rest)}
-            {...options}
-        />
+        <FormGroup color={!!(touched && error) ? 'danger' : ''} className={classnames(className, 'w-100')} {...sanitizeRestProps(rest)}>
+            <FieldTitle
+                label={label}
+                source={source}
+                resource={resource}
+                isRequired={isRequired}
+                labelHidden={labelHidden}
+            />
+            <Input
+                {...input}
+                {...options}
+                rows={rows}
+                type="textarea"
+            />
+            {(touched &&  error) && <FormFeedback>{touched &&  error}</FormFeedback>}
+        </FormGroup>
     );
 };
 
@@ -49,12 +53,12 @@ LongTextInput.propTypes = {
     input: PropTypes.object,
     isRequired: PropTypes.bool,
     label: PropTypes.string,
-    fullWidth: PropTypes.bool,
     meta: PropTypes.object,
     name: PropTypes.string,
     options: PropTypes.object,
     resource: PropTypes.string,
     source: PropTypes.string,
+    rows: PropTypes.string,
     validate: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.arrayOf(PropTypes.func),
@@ -64,7 +68,7 @@ LongTextInput.propTypes = {
 const EnhancedLongTextInput = addField(LongTextInput);
 EnhancedLongTextInput.defaultProps = {
     options: {},
-    fullWidth: true,
+    rows: '5',
 };
 
 export default EnhancedLongTextInput;

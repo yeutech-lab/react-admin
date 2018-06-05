@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LinearProgress } from 'material-ui/Progress';
-import { withStyles } from 'material-ui/styles';
+import Progress from 'bootstrap-styled/lib/Progress';
+import ProgressBar from 'bootstrap-styled/lib/Progress/ProgressBar';
 import { ReferenceManyFieldController } from '@yeutech/ra-core';
-
-const styles = {
-    progress: { marginTop: '1em' },
-};
 
 export const ReferenceManyFieldView = ({
     children,
-    classes = {},
     className,
     currentSort,
     data,
@@ -21,7 +16,11 @@ export const ReferenceManyFieldView = ({
     setSort,
 }) => {
     if (isLoading) {
-        return <LinearProgress className={classes.progress} />;
+			return (
+        <Progress className="mt-2">
+            <ProgressBar valueNow={100} striped animated />
+        </Progress>
+			);
     }
 
     return React.cloneElement(children, {
@@ -141,13 +140,7 @@ ReferenceManyField.defaultProps = {
     perPage: 25,
     sort: { field: 'id', order: 'DESC' },
     source: 'id',
-};
-
-const EnhancedReferenceManyField = withStyles(styles)(ReferenceManyField);
-
-EnhancedReferenceManyField.defaultProps = {
     addLabel: true,
-    source: 'id',
 };
 
-export default EnhancedReferenceManyField;
+export default ReferenceManyField;

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Chip from 'material-ui/Chip';
-import { withStyles } from 'material-ui/styles';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import Input from 'bootstrap-styled/lib/Input';
+import Option from 'bootstrap-styled/lib/Option';
+import Label from 'bootstrap-styled/lib/Label';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import compose from 'recompose/compose';
-import classnames from 'classnames';
 import { addField, translate, FieldTitle } from '@yeutech/ra-core';
 
 const sanitizeRestProps = ({
@@ -49,21 +47,6 @@ const sanitizeRestProps = ({
     validation,
     ...rest
 }) => rest;
-
-const styles = theme => ({
-    root: {},
-    chips: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    chip: {
-        margin: theme.spacing.unit / 4,
-    },
-    select: {
-        height: 'auto',
-        overflow: 'auto',
-    },
-});
 
 /**
  * An Input component for a select box allowing multiple selections, using an array of objects for the options
@@ -154,19 +137,18 @@ export class SelectArrayInput extends Component {
     renderMenuItem = choice => {
         const { optionValue } = this.props;
         return (
-            <MenuItem
+            <Option
                 key={get(choice, optionValue)}
                 value={get(choice, optionValue)}
             >
                 {this.renderMenuItemOption(choice)}
-            </MenuItem>
+            </Option>
         );
     };
 
     render() {
         const {
             choices,
-            classes,
             className,
             isRequired,
             label,
@@ -176,6 +158,8 @@ export class SelectArrayInput extends Component {
             source,
             optionText,
             optionValue,
+            size,
+            classNameInput,
             ...rest
         } = this.props;
         if (typeof meta === 'undefined') {
@@ -186,55 +170,39 @@ export class SelectArrayInput extends Component {
         const { touched, error, helperText = false } = meta;
 
         return (
-            <FormControl
-                margin="normal"
-                className={classnames(classes.root, className)}
+            <FormGroup
+                color={meta.error ? 'danger' : ''}
+                className={className}
                 {...sanitizeRestProps(rest)}
             >
-                <InputLabel htmlFor={source}>
+                <Label htmlFor={source}>
                     <FieldTitle
                         label={label}
                         source={source}
                         resource={resource}
                         isRequired={isRequired}
                     />
-                </InputLabel>
-                <Select
-                    autoWidth
-                    multiple
-                    input={<Input id={source} />}
+                </Label>
+                <Input
+                    type="select"
                     value={this.state.value}
-                    error={!!(touched && error)}
-                    renderValue={selected => (
-                        <div className={classes.chips}>
-                            {choices
-                                .filter(choice =>
-                                    selected.includes(get(choice, optionValue))
-                                )
-                                .map(choice => (
-                                    <Chip
-                                        key={get(choice, optionValue)}
-                                        label={get(choice, optionText)}
-                                        className={classes.chip}
-                                    />
-                                ))}
-                        </div>
-                    )}
+                    id={source}
+                    size={size}
+                    className={classNameInput}
                     {...options}
                     onChange={this.handleChange}
                 >
                     {choices.map(this.renderMenuItem)}
-                </Select>
-                {touched && error && <FormHelperText>{error}</FormHelperText>}
-                {helperText && <FormHelperText>{helperText}</FormHelperText>}
-            </FormControl>
+                </Input>
+                {touched && error && <FormFeedback>{error}</FormFeedback>}
+                {helperText && <FormFeedback>{helperText}</FormFeedback>}
+            </FormGroup>
         );
     }
 }
 
 SelectArrayInput.propTypes = {
     choices: PropTypes.arrayOf(PropTypes.object),
-    classes: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.node,
     input: PropTypes.object,
@@ -255,7 +223,6 @@ SelectArrayInput.propTypes = {
 };
 
 SelectArrayInput.defaultProps = {
-    classes: {},
     choices: [],
     options: {},
     optionText: 'name',
@@ -266,7 +233,6 @@ SelectArrayInput.defaultProps = {
 const EnhancedSelectArrayInput = compose(
     addField,
     translate,
-    withStyles(styles)
 )(SelectArrayInput);
 
 export default EnhancedSelectArrayInput;

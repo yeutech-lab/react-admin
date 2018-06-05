@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shouldUpdate from 'recompose/shouldUpdate';
-import { TableBody } from 'material-ui/Table';
+import Tbody from 'bootstrap-styled/lib/Table/Tbody';
 import classnames from 'classnames';
 
 import DatagridRow from './DatagridRow';
 
 const DatagridBody = ({
     basePath,
-    classes,
     className,
     resource,
     children,
@@ -19,20 +18,17 @@ const DatagridBody = ({
     data,
     selectedIds,
     styles,
-    rowStyle,
+    rowClassName,
     onToggleItem,
     version,
     ...rest
 }) => (
-    <TableBody className={classnames('datagrid-body', className)} {...rest}>
+    <Tbody className={classnames('datagrid-body', className)} {...rest}>
         {ids.map((id, rowIndex) => (
             <DatagridRow
                 basePath={basePath}
-                classes={classes}
-                className={classnames(classes.row, {
-                    [classes.rowEven]: rowIndex % 2 === 0,
-                    [classes.rowOdd]: rowIndex % 2 !== 0,
-                })}
+                // AJT TODO: check how mateiralUI uses rowEven and odds with modulo
+                className={className}
                 hasBulkActions={hasBulkActions}
                 id={id}
                 key={id}
@@ -41,17 +37,16 @@ const DatagridBody = ({
                 resource={resource}
                 selected={selectedIds.includes(id)}
                 hover={hover}
-                style={rowStyle ? rowStyle(data[id], rowIndex) : null}
+                rowClassName={rowClassName ? rowClassName(data[id]) : null}
             >
                 {children}
             </DatagridRow>
         ))}
-    </TableBody>
+    </Tbody>
 );
 
 DatagridBody.propTypes = {
     basePath: PropTypes.string,
-    classes: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.node,
     data: PropTypes.object.isRequired,
@@ -61,7 +56,7 @@ DatagridBody.propTypes = {
     isLoading: PropTypes.bool,
     onToggleItem: PropTypes.func,
     resource: PropTypes.string,
-    rowStyle: PropTypes.func,
+	  rowClassName: PropTypes.func,
     selectedIds: PropTypes.arrayOf(PropTypes.any).isRequired,
     styles: PropTypes.object,
     version: PropTypes.number,

@@ -1,31 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardActions as MuiCardActions } from 'material-ui/Card';
-import { withStyles } from 'material-ui/styles';
+import ButtonGroup from 'bootstrap-styled/lib/ButtonGroup';
 import classnames from 'classnames';
 
-const styles = {
-    cardActions: {
-        zIndex: 2,
-        display: 'flex',
-        justifyContent: 'flex-end',
-        flexWrap: 'wrap',
-    },
-};
-
-const CardActions = ({ classes, className, children, ...rest }) => (
-    <MuiCardActions
-        className={classnames(classes.cardActions, className)}
+const CardActions = ({ className, children, ...rest }) => (
+    <ButtonGroup
+        className={classnames('d-flex justify-content-end flex-wrap', className)}
         {...rest}
     >
         {children}
-    </MuiCardActions>
+    </ButtonGroup>
 );
 
 CardActions.propTypes = {
     children: PropTypes.node,
-    classes: PropTypes.object,
     className: PropTypes.string,
 };
 
-export default withStyles(styles)(CardActions);
+export default CardActions;

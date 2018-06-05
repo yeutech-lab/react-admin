@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableCell } from 'material-ui/Table';
+import Td from 'bootstrap-styled/lib/Table/Td';
 import classnames from 'classnames';
 
 const sanitizeRestProps = ({
@@ -23,10 +23,9 @@ export const DatagridCell = ({
     resource,
     ...rest
 }) => (
-    <TableCell
-        className={classnames(className, field.props.cellClassName)}
-        numeric={field.props.textAlign === 'right'}
-        padding="none"
+    <Td
+        style={{ verticalAlign: 'middle', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+        className={classnames(className, 'p-0 align-middle')}
         {...sanitizeRestProps(rest)}
     >
         {React.cloneElement(field, {
@@ -34,7 +33,7 @@ export const DatagridCell = ({
             basePath: field.props.basePath || basePath,
             resource,
         })}
-    </TableCell>
+    </Td>
 );
 
 DatagridCell.propTypes = {

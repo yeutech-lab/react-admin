@@ -18,7 +18,7 @@ import {
     SimpleForm,
     TextField,
     TextInput,
-} from '@yeutech/react-admin-bs';
+} from '@yeutech/ra-ui-bootstrap-styled';
 import Icon from '@material-ui/icons/Comment';
 import withStyles from 'material-ui/styles/withStyles';
 
@@ -29,7 +29,7 @@ import ApproveButton from './ApproveButton';
 import ReviewEditActions from './ReviewEditActions';
 import BulkApproveAction from './BulkApproveAction';
 import BulkRejectAction from './BulkRejectAction';
-import rowStyle from './rowStyle';
+import rowClassName from './rowClassName';
 import MobileGrid from './MobileGrid';
 
 export const ReviewIcon = Icon;
@@ -94,7 +94,7 @@ export const ReviewList = withStyles(listStyles)(({ classes, ...props }) => (
         <Responsive
             xsmall={<MobileGrid />}
             medium={
-                <Datagrid rowStyle={rowStyle}>
+                <Datagrid rowClassName={rowClassName}>
                     <DateField source="date" />
                     <CustomerReferenceField />
                     <ProductReferenceField />

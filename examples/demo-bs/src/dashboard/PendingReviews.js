@@ -1,18 +1,22 @@
 import React from 'react';
 import compose from 'recompose/compose';
-import Card, { CardHeader } from 'material-ui/Card';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
+import CardTitle from 'bootstrap-styled/lib/Cards/CardTitle';
+import CardSubtitle from 'bootstrap-styled/lib/Cards/CardSubtitle';
+import ListGroup from 'bootstrap-styled/lib/ListGroup';
+import ListGroupItem from 'bootstrap-styled/lib/ListGroup/ListGroupItem';
+import ListGroupItemText from 'bootstrap-styled/lib/ListGroup/ListGroupItemText';
 import CommentIcon from '@material-ui/icons/Comment';
 import Avatar from 'material-ui/Avatar';
 import { withStyles } from 'material-ui/styles';
 import { Link } from 'react-router-dom';
 import { translate } from '@yeutech/react-admin-bs';
-
+import classnames from 'classnames';
 import StarRatingField from '../reviews/StarRatingField';
 
 const styles = theme => ({
     titleLink: { textDecoration: 'none', color: 'inherit' },
-    card: { borderLeft: 'solid 4px #f44336', flex: 1, marginRight: '1em' },
     icon: {
         float: 'right',
         width: 64,
@@ -44,23 +48,26 @@ const PendingReviews = ({
     translate,
     classes,
 }) => (
-    <Card className={classes.card}>
-        <CommentIcon className={classes.icon} />
-        <CardHeader
-            title={
+    <Card style={{ borderLeft: 'solid 4px #f44336', flex: 1, marginRight: '1em' }}>
+        <CardBlock style={{ height: '60px' }}>
+            <CommentIcon className={classes.icon} />
+            <CardTitle>
                 <Link to={location} className={classes.titleLink}>
-                    {nb}
+                  {nb}
                 </Link>
-            }
-            subheader={translate('pos.dashboard.pending_reviews')}
-        />
-        <List>
+            </CardTitle>
+            <CardSubtitle color="muted">
+                {translate('pos.dashboard.pending_reviews')}
+            </CardSubtitle>
+        </CardBlock>
+        <ListGroup>
             {reviews.map(record => (
-                <ListItem
+                <ListGroupItem
                     key={record.id}
-                    button
-                    component={Link}
+                    action
+                    tag={Link}
                     to={`/reviews/${record.id}`}
+                    className="border-0 rounded-0 d-flex flex-row justify-content-between"
                 >
                     {customers[record.customer_id] ? (
                         <Avatar
@@ -72,15 +79,16 @@ const PendingReviews = ({
                         <Avatar />
                     )}
 
-                    <ListItemText
-                        primary={<StarRatingField record={record} />}
-                        secondary={record.comment}
-                        className={classes.listItemText}
+                    <ListGroupItemText
+                        className={classnames(classes.listItemText, 'd-flex flex-column')}
                         style={{ paddingRight: 0 }}
-                    />
-                </ListItem>
+                    >
+                      <StarRatingField record={record} />
+											{record.comment}
+                    </ListGroupItemText>
+                </ListGroupItem>
             ))}
-        </List>
+        </ListGroup>
     </Card>
 );
 

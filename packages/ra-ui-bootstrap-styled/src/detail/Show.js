@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'material-ui/Card';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
 import classnames from 'classnames';
 import { ShowController } from '@yeutech/ra-core';
 

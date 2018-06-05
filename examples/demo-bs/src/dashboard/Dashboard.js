@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { GET_LIST, GET_MANY, Responsive, ViewTitle } from '@yeutech/react-admin-bs';
+import {
+    GET_LIST,
+    GET_MANY,
+    Responsive,
+    ViewTitle,
+} from '@yeutech/react-admin-bs';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -143,7 +148,7 @@ class Dashboard extends Component {
             <Responsive
                 xsmall={
                     <div>
-                        <ViewTitle title="Posters Galore Admin" />
+                        <ViewTitle title="RA-Bootstrap-Styled Test" />
                         <div style={styles.flexColumn}>
                             <div style={{ marginBottom: '2em' }}>
                                 <Welcome />

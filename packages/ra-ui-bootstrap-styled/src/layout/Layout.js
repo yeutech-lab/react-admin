@@ -7,7 +7,6 @@ import {
     createMuiTheme,
     withStyles,
 } from 'material-ui/styles';
-import Hidden from 'material-ui/Hidden';
 import compose from 'recompose/compose';
 
 import AppBar from './AppBar';
@@ -72,9 +71,9 @@ const Layout = ({
         {...sanitizeRestProps(props)}
     >
         <div className={classes.appFrame}>
-            <Hidden xsDown>
-                <AppBar title={title} open={open} logout={logout} />
-            </Hidden>
+            <div className="d-sm-block d-none">
+							<AppBar title={title} open={open} logout={logout} />
+            </div>
             <main className={classes.contentWithSidebar}>
                 <Sidebar>
                     {createElement(menu || Menu, {

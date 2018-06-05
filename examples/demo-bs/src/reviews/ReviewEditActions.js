@@ -1,6 +1,10 @@
 import React from 'react';
 import { CardActions } from 'material-ui/Card';
-import { ListButton, DeleteButton, RefreshButton } from '@yeutech/react-admin-bs';
+import {
+    ListButton,
+    DeleteButton,
+    RefreshButton,
+} from '@yeutech/react-admin-bs';
 import AcceptButton from './AcceptButton';
 import RejectButton from './RejectButton';
 

@@ -1,45 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { withStyles } from 'material-ui/styles';
 
 import Labeled from '../input/Labeled';
 
 const sanitizeRestProps = ({ basePath, record, resoure, ...rest }) => rest;
 
-const styles = theme => ({
-    input: { width: theme.spacing.unit * 32 },
-});
-
-export const FormInput = ({ classes, input, ...rest }) =>
+export const FormInput = ({ classes, input, formClassName, ...rest }) =>
     input ? (
         <div
             className={classnames(
                 'ra-input',
                 `ra-input-${input.props.source}`,
-                input.props.formClassName
+								formClassName
             )}
         >
             {input.props.addLabel ? (
                 <Labeled {...input.props} {...sanitizeRestProps(rest)}>
                     {React.cloneElement(input, {
-                        className: classnames(
-                            {
-                                [classes.input]: !input.props.fullWidth,
-                            },
-                            input.props.className
-                        ),
+                        className: input.props.className,
                         ...rest,
                     })}
                 </Labeled>
             ) : (
                 React.cloneElement(input, {
-                    className: classnames(
-                        {
-                            [classes.input]: !input.props.fullWidth,
-                        },
-                        input.props.className
-                    ),
+                    className: input.props.className,
                     ...rest,
                 })
             )}
@@ -52,4 +37,4 @@ FormInput.propTypes = {
     input: PropTypes.object,
 };
 
-export default withStyles(styles)(FormInput);
+export default FormInput;

@@ -1,27 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import { withStyles } from 'material-ui/styles';
+import styled from 'styled-components';
+import classnames from 'classnames';
 import { FieldTitle } from '@yeutech/ra-core';
 
-const styles = theme => ({
-    label: {
-        position: 'relative',
-    },
-    value: {
-        fontFamily: theme.typography.fontFamily,
-        color: 'currentColor',
-        padding: `${theme.spacing.unit}px 0 ${theme.spacing.unit / 2}px`,
-        border: 0,
-        boxSizing: 'content-box',
-        verticalAlign: 'middle',
-        background: 'none',
-        margin: 0, // Reset for Safari
-        display: 'block',
-        width: '100%',
-    },
-});
+const LabeledContainer = styled.div`
+  padding: 1rem 0 1rem,
+  border: 0,
+  background: none,
+  margin: 0, // Reset for Safari
+  display: block,
+  width: 100%,
+`;
 
 /**
  * Use any component as read-only Input, labeled just like other Inputs.
@@ -40,7 +30,6 @@ const styles = theme => ({
  */
 export const Labeled = ({
     children,
-    classes,
     className,
     input,
     isRequired,
@@ -60,21 +49,19 @@ export const Labeled = ({
     }
 
     return (
-        <FormControl className={className} margin="normal">
-            <InputLabel shrink className={classes.label}>
-                <FieldTitle
-                    label={label}
-                    source={source}
-                    resource={resource}
-                    isRequired={isRequired}
-                />
-            </InputLabel>
-            <div className={classes.value}>
+        <div className={classnames(className, 'mt-3')}>
+            <FieldTitle
+            label={label}
+            source={source}
+            resource={resource}
+            isRequired={isRequired}
+            />
+            <LabeledContainer>
                 {children && typeof children.type !== 'string'
-                    ? React.cloneElement(children, { input, resource, ...rest })
-                    : children}
-            </div>
-        </FormControl>
+                ? React.cloneElement(children, { input, resource, ...rest })
+                : children}
+            </LabeledContainer>
+        </div>
     );
 };
 
@@ -94,4 +81,4 @@ Labeled.propTypes = {
     labelStyle: PropTypes.object,
 };
 
-export default withStyles(styles)(Labeled);
+export default Labeled;

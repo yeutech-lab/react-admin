@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shouldUpdate from 'recompose/shouldUpdate';
-import ContentCreate from '@material-ui/icons/Create';
+import Fa from 'bootstrap-styled/lib/Fa';
 
 import Link from '../Link';
 import { linkToRecord } from '@yeutech/ra-core';
@@ -14,19 +14,18 @@ const EditButton = ({
     ...rest
 }) => (
     <Button
-        component={Link}
+        tag={Link}
         to={linkToRecord(basePath, record.id)}
         label={label}
         {...rest}
     >
-        <ContentCreate />
+        <Fa pencil />
     </Button>
 );
 
 EditButton.propTypes = {
     basePath: PropTypes.string,
     className: PropTypes.string,
-    classes: PropTypes.object,
     label: PropTypes.string,
     record: PropTypes.object,
 };

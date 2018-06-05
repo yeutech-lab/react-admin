@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import pure from 'recompose/pure';
-import Typography from 'material-ui/Typography';
 import sanitizeRestProps from './sanitizeRestProps';
 
 export const removeTags = input =>
@@ -18,24 +17,22 @@ const RichTextField = ({
     const value = get(record, source);
     if (stripTags) {
         return (
-            <Typography
+            <span
                 className={className}
-                component="span"
                 {...sanitizeRestProps(rest)}
             >
                 {removeTags(value)}
-            </Typography>
+            </span>
         );
     }
 
     return (
-        <Typography
+        <span
             className={className}
-            component="span"
             {...sanitizeRestProps(rest)}
         >
             <span dangerouslySetInnerHTML={{ __html: value }} />
-        </Typography>
+        </span>
     );
 };
 

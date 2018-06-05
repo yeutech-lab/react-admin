@@ -2,31 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import Button from 'material-ui/Button';
-import ContentSave from '@material-ui/icons/Save';
+import Fa from 'bootstrap-styled/lib/Fa';
+import ButtonBs from 'bootstrap-styled/lib/Button';
 import { CircularProgress } from 'material-ui/Progress';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 
 import { showNotification, translate } from '@yeutech/ra-core';
 
-const styles = {
-    button: {
-        margin: '10px 24px',
-        position: 'relative',
-    },
-    iconPaddingStyle: {
-        paddingRight: '0.5em',
-    },
-};
-
 const sanitizeRestProps = ({
     className,
-    classes,
     saving,
     label,
     invalid,
-    variant,
     translate,
     handleSubmitWithRedirect,
     submitOnEnter,
@@ -64,7 +51,6 @@ export class SaveButton extends Component {
     render() {
         const {
             className,
-            classes = {},
             invalid,
             label = 'ra.action.save',
             pristine,
@@ -72,15 +58,13 @@ export class SaveButton extends Component {
             saving,
             submitOnEnter,
             translate,
-            variant = 'raised',
             ...rest
         } = this.props;
 
         const type = submitOnEnter ? 'submit' : 'button';
         return (
-            <Button
-                className={classnames(classes.button, className)}
-                variant={variant}
+            <ButtonBs
+                className={classnames(className, 'cursor-pointer')}
                 type={type}
                 onClick={this.handleClick}
                 color={saving ? 'default' : 'primary'}
@@ -93,17 +77,16 @@ export class SaveButton extends Component {
                         className={classes.iconPaddingStyle}
                     />
                 ) : (
-                    <ContentSave className={classes.iconPaddingStyle} />
+                    <Fa save className="pr-2" />
                 )}
                 {label && translate(label, { _: label })}
-            </Button>
+            </ButtonBs>
         );
     }
 }
 
 SaveButton.propTypes = {
     className: PropTypes.string,
-    classes: PropTypes.object,
     handleSubmitWithRedirect: PropTypes.func,
     invalid: PropTypes.bool,
     label: PropTypes.string,
@@ -113,7 +96,6 @@ SaveButton.propTypes = {
     showNotification: PropTypes.func,
     submitOnEnter: PropTypes.bool,
     translate: PropTypes.func.isRequired,
-    variant: PropTypes.oneOf(['raised', 'flat', 'fab']),
 };
 
 SaveButton.defaultProps = {
@@ -127,7 +109,6 @@ const mapStateToProps = state => ({
 const enhance = compose(
     translate,
     connect(mapStateToProps, { showNotification }),
-    withStyles(styles)
 );
 
 export default enhance(SaveButton);

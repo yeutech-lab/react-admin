@@ -1,6 +1,9 @@
 import React from 'react';
 import {
-    translate,
+	translate,
+	required,
+} from '@yeutech/react-admin-bs';
+import {
     Datagrid,
     Edit,
     EditButton,
@@ -10,7 +13,7 @@ import {
     SimpleForm,
     TextField,
     TextInput,
-} from '@yeutech/react-admin-bs';
+} from '@yeutech/ra-ui-bootstrap-styled';
 import Icon from '@material-ui/icons/Bookmark';
 import withStyles from 'material-ui/styles/withStyles';
 

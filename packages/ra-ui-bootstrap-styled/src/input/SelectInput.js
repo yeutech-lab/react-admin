@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import TextField from 'material-ui/TextField';
-import { MenuItem } from 'material-ui/Menu';
-import { withStyles } from 'material-ui/styles';
+import FormGroup from 'bootstrap-styled/lib/Form/FormGroup';
+import Input from 'bootstrap-styled/lib/Input';
+import Option from 'bootstrap-styled/lib/Option';
+import FormFeedback from 'bootstrap-styled/lib/Form/FormFeedback';
 import compose from 'recompose/compose';
 import { addField, translate, FieldTitle } from '@yeutech/ra-core';
 
@@ -45,12 +46,6 @@ const sanitizeRestProps = ({
     validation,
     ...rest
 }) => rest;
-
-const styles = theme => ({
-    input: {
-        minWidth: theme.spacing.unit * 20,
-    },
-});
 
 /**
  * An Input component for a select box, using an array of objects for the options
@@ -131,7 +126,7 @@ export class SelectInput extends Component {
 
     addAllowEmpty = choices => {
         if (this.props.allowEmpty) {
-            return [<MenuItem value={null} key="null" />, ...choices];
+            return [<Option value={null} key="null" />, ...choices];
         }
 
         return choices;
@@ -154,19 +149,19 @@ export class SelectInput extends Component {
     renderMenuItem = choice => {
         const { optionValue } = this.props;
         return (
-            <MenuItem
+            <Option
                 key={get(choice, optionValue)}
                 value={get(choice, optionValue)}
             >
                 {this.renderMenuItemOption(choice)}
-            </MenuItem>
+            </Option>
         );
     };
 
     render() {
         const {
             choices,
-            classes,
+					  classNameInput,
             className,
             isRequired,
             label,
@@ -175,6 +170,7 @@ export class SelectInput extends Component {
             resource,
             source,
             allowEmpty,
+            size,
             ...rest
         } = this.props;
         if (typeof meta === 'undefined') {
@@ -185,27 +181,27 @@ export class SelectInput extends Component {
         const { touched, error, helperText = false } = meta;
 
         return (
-            <TextField
-                select
-                margin="normal"
-                value={this.state.value}
-                label={
-                    <FieldTitle
-                        label={label}
-                        source={source}
-                        resource={resource}
-                        isRequired={isRequired}
-                    />
-                }
-                className={`${classes.input} ${className}`}
-                error={!!(touched && error)}
-                helperText={(touched && error) || helperText}
-                {...options}
-                {...sanitizeRestProps(rest)}
-                onChange={this.handleChange}
-            >
-                {this.addAllowEmpty(choices.map(this.renderMenuItem))}
-            </TextField>
+            <FormGroup color={meta.error ? 'danger' : ''} className={className}>
+                <FieldTitle
+                    label={label}
+                    source={source}
+                    resource={resource}
+                    isRequired={isRequired}
+                />
+                <Input
+                  value={this.state.value}
+                    onChange={this.handleChange}
+                    type="select"
+                    size={size}
+                    className={classNameInput}
+                    {...options}
+                    {...sanitizeRestProps(rest)}
+                >
+                    {this.addAllowEmpty(choices.map(this.renderMenuItem))}
+                </Input>
+                {touched && error && <FormFeedback>{error}</FormFeedback>}
+                {helperText && <FormFeedback>{helperText}</FormFeedback>}
+            </FormGroup>
         );
     }
 }
@@ -213,7 +209,6 @@ export class SelectInput extends Component {
 SelectInput.propTypes = {
     allowEmpty: PropTypes.bool.isRequired,
     choices: PropTypes.arrayOf(PropTypes.object),
-    classes: PropTypes.object,
     className: PropTypes.string,
     input: PropTypes.object,
     isRequired: PropTypes.bool,
@@ -234,7 +229,6 @@ SelectInput.propTypes = {
 
 SelectInput.defaultProps = {
     allowEmpty: false,
-    classes: {},
     choices: [],
     options: {},
     optionText: 'name',
@@ -242,4 +236,4 @@ SelectInput.defaultProps = {
     translateChoice: true,
 };
 
-export default compose(addField, translate, withStyles(styles))(SelectInput);
+export default compose(addField, translate)(SelectInput);

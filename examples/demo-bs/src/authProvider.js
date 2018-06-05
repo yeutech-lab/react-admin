@@ -1,4 +1,9 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from '@yeutech/react-admin-bs';
+import {
+    AUTH_LOGIN,
+    AUTH_LOGOUT,
+    AUTH_CHECK,
+    AUTH_ERROR,
+} from '@yeutech/react-admin-bs';
 
 export default (type, params) => {
     if (type === AUTH_LOGIN) {

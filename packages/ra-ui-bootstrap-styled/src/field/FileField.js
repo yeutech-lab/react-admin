@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
+import Ul from 'bootstrap-styled/lib/Ul';
+import Li from 'bootstrap-styled/lib/Li';
+import A from 'bootstrap-styled/lib/A'
 import sanitizeRestProps from './sanitizeRestProps';
-
-const styles = {
-    root: { display: 'inline-block' },
-};
 
 export const FileField = ({
     classes = {},
@@ -24,7 +22,7 @@ export const FileField = ({
     if (!sourceValue) {
         return (
             <div
-                className={classnames(classes.root, className)}
+              className={classnames('d-inline-block', className)}
                 {...sanitizeRestProps(rest)}
             />
         );
@@ -32,8 +30,8 @@ export const FileField = ({
 
     if (Array.isArray(sourceValue)) {
         return (
-            <ul
-                className={classnames(classes.root, className)}
+            <Ul
+                className={classnames('d-inline-block', className)}
                 {...sanitizeRestProps(rest)}
             >
                 {sourceValue.map((file, index) => {
@@ -41,28 +39,28 @@ export const FileField = ({
                     const srcValue = get(file, src) || title;
 
                     return (
-                        <li key={index}>
-                            <a
+                        <Li key={index}>
+                            <A
                                 href={srcValue}
                                 title={titleValue}
                                 target={target}
                             >
                                 {titleValue}
-                            </a>
-                        </li>
+                            </A>
+                        </Li>
                     );
                 })}
-            </ul>
+            </Ul>
         );
     }
 
     const titleValue = get(record, title) || title;
 
     return (
-        <div className={classnames(classes.root, className)} {...rest}>
-            <a href={sourceValue} title={titleValue} target={target}>
+        <div className={classnames('d-inline-block', className)} {...rest}>
+            <A href={sourceValue} title={titleValue} target={target}>
                 {titleValue}
-            </a>
+            </A>
         </div>
     );
 };
@@ -70,7 +68,6 @@ export const FileField = ({
 FileField.propTypes = {
     addLabel: PropTypes.bool,
     basePath: PropTypes.string,
-    classes: PropTypes.object,
     className: PropTypes.string,
     cellClassName: PropTypes.string,
     headerClassName: PropTypes.string,
@@ -81,4 +78,4 @@ FileField.propTypes = {
     target: PropTypes.string,
 };
 
-export default withStyles(styles)(FileField);
+export default FileField;

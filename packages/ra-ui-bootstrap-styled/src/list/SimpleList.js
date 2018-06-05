@@ -1,40 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from 'material-ui/Avatar';
-import List, {
-    ListItem,
-    ListItemAvatar,
-    ListItemIcon,
-    ListItemSecondaryAction,
-    ListItemText,
-} from 'material-ui/List';
-import { withStyles } from 'material-ui/styles';
-import { Link } from 'react-router-dom';
+import classnames from 'classnames';
+import ListGroup from 'bootstrap-styled/lib/ListGroup';
+import ListGroupItem from 'bootstrap-styled/lib/ListGroup/ListGroupItem';
+import ListGroupItemText from 'bootstrap-styled/lib/ListGroup/ListGroupItemText';
+import Link from '../Link';
+import Avatar from '../extendMui/Avatar';
 import { linkToRecord } from '@yeutech/ra-core';
 
-const styles = {
-    link: {
-        textDecoration: 'none',
-        color: 'inherit',
-    },
-    tertiary: { float: 'right', opacity: 0.541176 },
-};
-
-const LinkOrNot = withStyles(styles)(
-    ({ classes, linkType, basePath, id, children }) =>
+const LinkOrNot = (
+    ({ classes, linkType, basePath, id, children, className }) =>
         linkType === 'edit' || linkType === true ? (
-            <Link to={linkToRecord(basePath, id)} className={classes.link}>
+            <Link to={linkToRecord(basePath, id)} className={classnames(className, 'cursor-pointer w-100')}>
                 {children}
             </Link>
         ) : linkType === 'show' ? (
-            <Link
-                to={`${linkToRecord(basePath, id)}/show`}
-                className={classes.link}
-            >
+            <Link to={`${linkToRecord(basePath, id)}/show`} className={classnames(className, 'cursor-pointer w-100')}>
                 {children}
             </Link>
         ) : (
-            <span>{children}</span>
+            <div className={classnames(className, 'w-100')}>{children}</div>
         )
 );
 
@@ -43,7 +28,6 @@ const sanitizeRestProps = ({ currentSort, isLoading, setSort, ...rest }) =>
 
 const SimpleList = ({
     basePath,
-    classes = {},
     className,
     data,
     hasBulkActions,
@@ -58,54 +42,47 @@ const SimpleList = ({
     secondaryText,
     selectedIds,
     tertiaryText,
+    // Our props
+    classNameListItem,
     ...rest
 }) => (
-    <List className={className} {...sanitizeRestProps(rest)}>
+    <ListGroup className={className} {...sanitizeRestProps(rest)}>
         {ids.map(id => (
-            <LinkOrNot linkType={linkType} basePath={basePath} id={id} key={id}>
-                <ListItem button>
+            <ListGroupItem action className="w-100 p-0">
+                <LinkOrNot linkType={linkType} basePath={basePath} id={id} key={id} className={classNameListItem}>
                     {leftIcon && (
-                        <ListItemIcon>{leftIcon(data[id], id)}</ListItemIcon>
+                        <div>{leftIcon(data[id], id)}</div>
                     )}
                     {leftAvatar && (
-                        <ListItemAvatar>
-                            <Avatar>{leftAvatar(data[id], id)}</Avatar>
-                        </ListItemAvatar>
+                        <Avatar>{leftAvatar(data[id], id)}</Avatar>
                     )}
-                    <ListItemText
-                        primary={
-                            <div>
-                                {primaryText(data[id], id)}
-                                {tertiaryText && (
-                                    <span className={classes.tertiary}>
+                    <ListGroupItemText>
+                        <div>
+                          {primaryText&& primaryText(data[id], id)}
+                          {tertiaryText && (
+                            <span style={{ float: 'right', opacity: 0.541176 }}>
                                         {tertiaryText(data[id], id)}
                                     </span>
-                                )}
-                            </div>
-                        }
-                        secondary={secondaryText && secondaryText(data[id], id)}
-                    />
-                    {(rightAvatar || rightIcon) && (
-                        <ListItemSecondaryAction>
-                            {rightAvatar && (
-                                <Avatar>{rightAvatar(data[id], id)}</Avatar>
-                            )}
-                            {rightIcon && (
-                                <ListItemIcon>
-                                    {rightIcon(data[id], id)}
-                                </ListItemIcon>
-                            )}
-                        </ListItemSecondaryAction>
+                          )}
+                          {secondaryText && secondaryText(data[id], id)}
+                        </div>
+                    </ListGroupItemText>
+                    {rightAvatar && (
+                        <Avatar>{rightAvatar(data[id], id)}</Avatar>
                     )}
-                </ListItem>
-            </LinkOrNot>
+                    {rightIcon && (
+                        <ListItemIcon>
+                            {rightIcon(data[id], id)}
+                        </ListItemIcon>
+                    )}
+                </LinkOrNot>
+            </ListGroupItem>
         ))}
-    </List>
+    </ListGroup>
 );
 
 SimpleList.propTypes = {
     basePath: PropTypes.string,
-    classes: PropTypes.object,
     className: PropTypes.string,
     data: PropTypes.object,
     hasBulkActions: PropTypes.bool.isRequired,
@@ -121,6 +98,7 @@ SimpleList.propTypes = {
     secondaryText: PropTypes.func,
     selectedIds: PropTypes.arrayOf(PropTypes.any).isRequired,
     tertiaryText: PropTypes.func,
+	  classNameListItem: PropTypes.string,
 };
 
 SimpleList.defaultProps = {
@@ -129,4 +107,4 @@ SimpleList.defaultProps = {
     selectedIds: [],
 };
 
-export default withStyles(styles)(SimpleList);
+export default SimpleList;

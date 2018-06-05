@@ -1,20 +1,15 @@
 // in src/comments.js
 import React from 'react';
 import { DateField, EditButton, translate } from '@yeutech/react-admin-bs';
-import Card, { CardHeader, CardContent } from 'material-ui/Card';
+import Card from 'bootstrap-styled/lib/Cards/Card';
+import CardBlock from 'bootstrap-styled/lib/Cards/CardBlock';
+import CardTitle from 'bootstrap-styled/lib/Cards/Card';
 import { withStyles } from 'material-ui/styles';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from './StarRatingField';
 import ProductReferenceField from '../products/ProductReferenceField';
 import ApproveButton from './ApproveButton';
-import rowStyle from './rowStyle';
-
-const cardStyle = {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '0.5rem 0',
-};
+import rowClassName from './rowClassName';
 
 const listStyles = theme => ({
     card: {
@@ -27,7 +22,7 @@ const listStyles = theme => ({
         display: 'flex',
         flexDirection: 'rows',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
     },
     cardContent: theme.typography.body1,
     cardContentRow: {
@@ -39,32 +34,30 @@ const listStyles = theme => ({
 });
 
 const MobileGrid = withStyles(listStyles)(
-    translate(({ classes, ids, data, basePath, translate }) => (
-        <div style={{ margin: '1em' }}>
+    translate(({ classes, ids, data, basePath, translate, className }) => (
+        <div style={{ margin: '1em' }} className={className}>
             {ids.map(id => (
-                <Card key={id} style={rowStyle(data[id], cardStyle)}>
-                    <CardHeader
-                        title={
-                            <div className={classes.cardTitleContent}>
-                                <span>
-                                    {translate(
-                                        'resources.reviews.fields.date'
-                                    )}:&nbsp;
-                                    <DateField
-                                        record={data[id]}
-                                        source="date"
-                                    />
-                                </span>
-
-                                <EditButton
-                                    resource="reviews"
-                                    basePath={basePath}
-                                    record={data[id]}
+                <Card key={id} color={rowClassName(data[id])}>
+                    <CardTitle>
+                        <div className={classes.cardTitleContent}>
+                            <span>
+                                {translate(
+                                  'resources.reviews.fields.date'
+                                )}:&nbsp;
+                                <DateField
+                                  record={data[id]}
+                                  source="date"
                                 />
-                            </div>
-                        }
-                    />
-                    <CardContent className={classes.cardContent}>
+                            </span>
+
+                            <EditButton
+                              resource="reviews"
+                              basePath={basePath}
+                              record={data[id]}
+                            />
+                        </div>
+                    </CardTitle>
+                    <CardBlock className={classes.cardContent}>
                         <span className={classes.cardContentRow}>
                             {translate(
                                 'resources.reviews.fields.rating',
@@ -99,7 +92,7 @@ const MobileGrid = withStyles(listStyles)(
                                 <ApproveButton record={data[id]} />
                             </span>
                         )}
-                    </CardContent>
+                    </CardBlock>
                 </Card>
             ))}
         </div>

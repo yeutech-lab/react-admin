@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shouldUpdate from 'recompose/shouldUpdate';
-import ImageEye from '@material-ui/icons/RemoveRedEye';
+import Fa from 'bootstrap-styled/lib/Fa';
 import { linkToRecord } from '@yeutech/ra-core';
 
 import Link from '../Link';
@@ -14,12 +14,12 @@ const ShowButton = ({
     ...rest
 }) => (
     <Button
-        component={Link}
+        tag={Link}
         to={`${linkToRecord(basePath, record.id)}/show`}
         label={label}
         {...rest}
     >
-        <ImageEye />
+        <Fa eye />
     </Button>
 );
 

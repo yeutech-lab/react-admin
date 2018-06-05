@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import pure from 'recompose/pure';
+import A from 'bootstrap-styled/lib/A';
 import sanitizeRestProps from './sanitizeRestProps';
 
 const EmailField = ({ className, source, record = {}, ...rest }) => (
-    <a
+    <A
         className={className}
         href={`mailto:${get(record, source)}`}
         {...sanitizeRestProps(rest)}
     >
         {get(record, source)}
-    </a>
+    </A>
 );
 
 EmailField.propTypes = {

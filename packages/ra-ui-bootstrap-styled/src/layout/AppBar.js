@@ -1,12 +1,12 @@
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import MuiAppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
+import H2 from 'bootstrap-styled/lib/H2';
+import Header from 'bootstrap-styled/lib/Header';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import { toggleSidebar as toggleSidebarAction } from '@yeutech/ra-core';
@@ -20,6 +20,7 @@ const styles = theme => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         zIndex: 1300,
+        color: 'white',
     },
     toolbar: {
         paddingRight: 24,
@@ -70,18 +71,15 @@ const AppBar = ({
     toggleSidebar,
     ...rest
 }) => (
-    <MuiAppBar
-        className={classNames(classes.appBar, className)}
-        color="secondary"
-        position="absolute"
+    <Header
+        className={classnames(classes.appBar, className, 'bg-info')}
         {...rest}
     >
-        <Toolbar disableGutters className={classes.toolbar}>
+        <div className="d-flex align-items-center py-2 pr-4 pl-3">
             <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={toggleSidebar}
-                className={classNames(classes.menuButton)}
             >
                 <MenuIcon
                     classes={{
@@ -91,20 +89,16 @@ const AppBar = ({
                     }}
                 />
             </IconButton>
-            <Typography
-                variant="title"
-                color="inherit"
-                className={classes.title}
-            >
+            <H2 className={classnames(classes.title, 'my-0')}>
                 {typeof title === 'string' ? title : React.cloneElement(title)}
-            </Typography>
+            </H2>
             {logout &&
                 cloneElement(logout, {
                     className: classes.logout,
                 })}
-        </Toolbar>
+        </div>
         <LoadingIndicator className={classes.loadingIndicator} />
-    </MuiAppBar>
+    </Header>
 );
 
 AppBar.propTypes = {

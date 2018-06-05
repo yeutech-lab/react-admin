@@ -1,13 +1,15 @@
 import React, { cloneElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import FilterNoneIcon from '@material-ui/icons/FilterNone';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import ButtonDropdown from 'bootstrap-styled/lib/Button/ButtonDropdown';
+import DropdownToggle from 'bootstrap-styled/lib/Dropdown/DropdownToggle';
+import DropdownMenu from 'bootstrap-styled/lib/Dropdown/DropdownMenu';
+import DropdownItem from 'bootstrap-styled/lib/Dropdown/DropdownItem';
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
 import { translate } from '@yeutech/ra-core';
 
-import Button from '../button/Button';
 import BulkDeleteAction from './BulkDeleteAction';
 
 const styles = theme => ({
@@ -48,11 +50,7 @@ class BulkActions extends Component {
     };
 
     handleClick = () => {
-        this.setState({ isOpen: true });
-    };
-
-    handleClose = () => {
-        this.setState({ isOpen: false });
+        this.setState({ isOpen: !this.state.isOpen });
     };
 
     handleLaunchAction = action => {
@@ -79,38 +77,35 @@ class BulkActions extends Component {
         const { isOpen } = this.state;
 
         return (
-            <div>
-                <Button
-                    buttonRef={this.storeButtonRef}
-                    className={classnames(
-                        'bulk-actions-button',
-                        className,
-                        classes.bulkActionsButton,
-                        {
-                            [classes.selected]: selectedIds.length > 0,
-                            [classes.unselected]: selectedIds.length === 0,
-                        }
-                    )}
-                    alignIcon="right"
-                    aria-owns={isOpen ? 'bulk-actions-menu' : null}
-                    aria-haspopup="true"
-                    onClick={this.handleClick}
-                    {...sanitizeRestProps(rest)}
+            <ButtonDropdown
+                className={classnames(
+                    'bulk-actions-button',
+                    className,
+                    classes.bulkActionsButton,
+                    {
+                        [classes.selected]: selectedIds.length > 0,
+                        [classes.unselected]: selectedIds.length === 0,
+                    }
+                )}
+                aria-owns={isOpen ? 'bulk-actions-menu' : null}
+                aria-haspopup="true"
+                isOpen={isOpen}
+                toggle={this.handleClick}
+                color="info"
+                {...sanitizeRestProps(rest)}
+            >
+                <DropdownToggle
+                    className="h-100 cursor-pointer"
                 >
                     <FilterNoneIcon className={classes.icon} />
                     {translate(label, {
                         _: label,
                         smart_count: selectedIds.length,
                     })}
-                </Button>
-                <Menu
-                    id="bulk-actions-menu"
-                    anchorEl={this.anchorElement}
-                    onClose={this.handleClose}
-                    open={isOpen}
-                >
+                </DropdownToggle>
+                <DropdownMenu right>
                     {Children.map(children, (child, index) => (
-                        <MenuItem
+                        <DropdownItem
                             key={index}
                             className={classnames(
                                 'bulk-actions-menu-item',
@@ -120,9 +115,9 @@ class BulkActions extends Component {
                             {...sanitizeRestProps(rest)}
                         >
                             {translate(child.props.label)}
-                        </MenuItem>
+                        </DropdownItem>
                     ))}
-                </Menu>
+                </DropdownMenu>
                 {Children.map(
                     children,
                     (child, index) =>
@@ -135,7 +130,7 @@ class BulkActions extends Component {
                             selectedIds,
                         })
                 )}
-            </div>
+            </ButtonDropdown>
         );
     }
 }
