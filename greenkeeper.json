@@ -1,0 +1,32 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "examples/data-generator/package.json",
+        "examples/demo-bs/package.json",
+        "examples/demo/package.json",
+        "examples/graphcool-demo/package.json",
+        "examples/simple-bs/package.json",
+        "examples/simple/package.json",
+        "examples/tutorial/package.json",
+        "package.json",
+        "packages/ra-core/package.json",
+        "packages/ra-data-fakerest/package.json",
+        "packages/ra-data-graphcool/package.json",
+        "packages/ra-data-graphql-simple/package.json",
+        "packages/ra-data-graphql/package.json",
+        "packages/ra-data-json-server/package.json",
+        "packages/ra-data-simple-rest/package.json",
+        "packages/ra-input-rich-text/package.json",
+        "packages/ra-language-english/package.json",
+        "packages/ra-language-french/package.json",
+        "packages/ra-language-intl/package.json",
+        "packages/ra-realtime/package.json",
+        "packages/ra-ui-bootstrap-styled/package.json",
+        "packages/ra-ui-materialui/package.json",
+        "packages/react-admin-bs/package.json",
+        "packages/react-admin/package.json"
+      ]
+    }
+  }
+}
