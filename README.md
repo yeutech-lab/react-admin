@@ -6,7 +6,7 @@ A frontend Framework for building admin applications running in the browser on t
 
 [Demo](https://marmelab.com/react-admin-demo/) - [Documentation](https://marmelab.com/react-admin/) - [Releases](https://github.com/yeutech/react-admin/releases) - [Support](http://stackoverflow.com/questions/tagged/react-admin)
 
-[![react-admin-demo](https://marmelab.com/admin-on-rest/img/admin-on-rest-demo-still.png)](https://vimeo.com/205118063)
+[![react-admin-demo](https://marmelab.com/admin-on-rest/img/admin-on-rest-demo-still.png)](https://vimeo.com/205118063) [![Greenkeeper badge](https://badges.greenkeeper.io/yeutech-lab/react-admin.svg)](https://greenkeeper.io/)
 
 ## Features
 

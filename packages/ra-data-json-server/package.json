@@ -23,6 +23,6 @@
     },
     "dependencies": {
         "@yeutech/react-admin": "^2.0.0-RC2-yeutech.2",
-        "query-string": "~6.0.0"
+        "query-string": "~6.2.0"
     }
 }
